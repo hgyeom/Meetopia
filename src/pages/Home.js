@@ -1,7 +1,15 @@
 import React from 'react';
+import Header from '../components/Header';
+import Index from '../components/Index/Index';
 
+// const
 function Home() {
-  return <div>Home add dev</div>;
+  return (
+    <>
+      <Header />
+      <Index />
+    </>
+  );
 }
 
 export default Home;
