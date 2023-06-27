@@ -1,7 +1,10 @@
-import "./App.css";
+import './App.css';
+import { app } from './firebase';
+import Router from './shared/Router';
 
 function App() {
-  return <div>app</div>;
+  console.log('app', app);
+  return <Router />;
 }
 
 export default App;
