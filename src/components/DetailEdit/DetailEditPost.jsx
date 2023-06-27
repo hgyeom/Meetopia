@@ -1,6 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { db } from '../../firebase';
+import { styled } from 'styled-components';
 
 function DetailEditPost() {
   const [posts, setPosts] = useState([]);
@@ -86,16 +87,17 @@ function DetailEditPost() {
         margin: '30px'
       }}
     >
-      <h2>게시글 작성/수정 page</h2>
+      <MainTitle>게시글 작성/수정 page</MainTitle>
+      <br />
       <content>
         <form onSubmit={addPost}>
-          <div>
+          <ContentBox>
             <label>제목: </label>
             <input type="text" name="title" value={title} onChange={onChange} />
             <label>작성자명:</label>
             <input />
-          </div>
-          <div>
+          </ContentBox>
+          <ContentBox>
             주제별:
             <select name="category" value={selectTopic} onChange={handleSelectTopic}>
               {selectTopicList.map((item) => {
@@ -116,14 +118,14 @@ function DetailEditPost() {
                 );
               })}
             </select>
-          </div>
-          <div>
+          </ContentBox>
+          <ContentBox>
             <label>모임을 소개해주세요!</label>
             <div>
               <textarea rows="30" cols="80" type="text" name="content" value={content} onChange={onChange}></textarea>
             </div>
             <button>작성 완료</button>
-          </div>
+          </ContentBox>
         </form>
       </content>
     </div>
@@ -131,3 +133,14 @@ function DetailEditPost() {
 }
 
 export default DetailEditPost;
+
+const MainTitle = styled.h2`
+  font-size: larger;
+  font-weight: 600;
+`;
+
+const ContentBox = styled.div`
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+`;
