@@ -4,6 +4,7 @@ import users from '../modules/users';
 import comments from '../modules/comments';
 import posts from '../modules/posts';
 import category from '../modules/category';
+import location from '../modules/location';
 /*
 1. createStore()
 리덕스의 가장 핵심이 되는 스토어를 만드는 메소드(함수) 입니다. 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   users,
   comments: comments
   posts,
-  category
+  category,
+  location
 });
 const store = createStore(rootReducer);
 
