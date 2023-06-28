@@ -3,8 +3,35 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import shortid from 'shortid';
 import { db } from '../firebase';
+import { styled } from 'styled-components';
+
 // import { collection } from 'firebase/firestore';
 // import { addDoc, collection, getDocs, query } from 'firebase';
+
+// ----------------------------------styled-component---------------------------
+const StF = styled.form`
+  display: flex;
+  justify-content: center;
+`;
+
+const AddBtn = styled.button`
+  border-radius: 10px;
+  color: white;
+  background-color: #141414;
+  font-size: 20px;
+`;
+
+const CommentBox = styled.div`
+  border-bottom: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+`;
+
+const DeletedBtn = styled.button`
+  background-color: white;
+  border: none;
+`;
+// ----------------------------------styled-component---------------------------
 
 function Comments() {
   // const post = pots.filter((post) => post.id === id)[0];
@@ -42,11 +69,7 @@ function Comments() {
     <div>
       <div>
         <h3>댓글</h3>
-        <form
-          style={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
+        <StF
           onSubmit={(event) => {
             event.preventDefault();
             dispatch({
@@ -76,18 +99,8 @@ function Comments() {
             }}
           />
           <br />
-          <button
-            style={{
-              borderRadius: '10px',
-              color: 'white',
-              backgroundColor: '#141414',
-              fontSize: '20px'
-            }}
-            type="submit"
-          >
-            등록
-          </button>
-        </form>
+          <AddBtn type="submit">등록</AddBtn>
+        </StF>
       </div>
 
       <div>
@@ -95,19 +108,10 @@ function Comments() {
           .sort((a, b) => b - a)
           .map((comment) => {
             return (
-              <div
-                style={{
-                  borderBottom: '1px solid black'
-                }}
-                key={comment?.id}
-              >
+              <CommentBox key={comment?.id}>
                 <p>닉네임 : {comment.nickname}</p>
                 <p>내용 : {comment.comment}</p>
-                <button
-                  style={{
-                    backgroundColor: 'white',
-                    border: 'none'
-                  }}
+                <DeletedBtn
                   onClick={(event) => {
                     event.preventDefault();
                     dispatch({
@@ -117,8 +121,8 @@ function Comments() {
                   }}
                 >
                   삭제
-                </button>
-              </div>
+                </DeletedBtn>
+              </CommentBox>
             );
           })}
       </div>

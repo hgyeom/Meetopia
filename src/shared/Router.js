@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
-import Comments from '../comments/CommentsPage';
+import Comments from '../components/CommentsPage';
 import Detail from '../pages/Detail';
 import DetailEdit from '../pages/DetailEdit';
 // import Layout from './Layout';
