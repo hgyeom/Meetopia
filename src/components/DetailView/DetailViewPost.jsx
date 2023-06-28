@@ -1,23 +1,37 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { React, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+import { db } from '../../firebase';
 
 function DetailViewPost() {
-  const { id } = useParams();
-  //firebase에 있는 posts 접근 / detail view 에서 뿌려줘야해서 거기로 넣어하나..
-  // useEffect(() => {
-  //   // addDoc(collection(db, 'posts'), { contents: '데이터 저장 테스트' });
-  //   const fetchData = async () => {
-  //     const q = query(collection(db, 'posts'));
-  //     const querySnapshot = await getDocs(q);
+  const [posts, setPosts] = useState([]);
 
-  //     const initialPosts = [];
-  //     querySnapshot.forEach((doc) => {
-  //       initialPosts.push({ id: doc.id, ...doc.data() });
-  //     });
-  //     setPosts(initialPosts);
-  //   };
-  //   fetchData();
-  // }, []);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  // console.log(id);
+
+  //firebase 'posts' 데이터 읽어오기
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'posts'));
+      const querySnapshot = await getDocs(q);
+
+      const initialPosts = [];
+      querySnapshot.forEach((doc) => {
+        initialPosts.push({ id: doc.id, ...doc.data() });
+      });
+      setPosts(initialPosts);
+    };
+    fetchData();
+  }, []);
+
+  const post = posts.find((item) => item.id === id);
+
+  //수정 버튼 누르면 수정하는 페이지로
+  const onEditButton = () => {
+    navigate(`/detail`);
+  };
 
   return (
     <div
@@ -25,39 +39,48 @@ function DetailViewPost() {
         margin: '30px'
       }}
     >
-      <h2>게시글 view page</h2>
       <content>
         <div>
-          <h2>제목</h2>
-          <label>작성자명:</label>
-          {/* 작성자이름 받아오기 */}
-          <label>작성일:</label>
-          {/* 작성날짜 받아오기 */}
-          <button>
-            <Link to="/detail">수정</Link>
-          </button>
+          <PostTitle>{post?.title}</PostTitle>
+          <ContentBox>
+            <label>작성자명:</label>
+            {/* 작성자이름 받아오기 */}
+            <label>작성일:</label>
+            {post?.days}
+
+            <button onClick={onEditButton}>수정</button>
+          </ContentBox>
         </div>
-        <div>
-          주제별:
-          {/* 주제 받아오기 */}
-          지역별:
-          {/* 지역 받아오기 */}
-        </div>
-        <form>
+        <ContentBox>
+          주제별:{post?.category} 지역별:{post?.location}
+        </ContentBox>
+        <ContentBox>
           <label>모임을 소개해주세요!</label>
-          <div
-            style={{
-              border: '1px solid black',
-              width: '100%'
-            }}
-          >
-            모임소개글~~
-            {/* 소개글 불러오기 */}
-          </div>
-        </form>
+          <ContentPostBox>{post?.content}</ContentPostBox>
+        </ContentBox>
       </content>
     </div>
   );
 }
 
 export default DetailViewPost;
+
+const PostTitle = styled.p`
+  font-size: xx-large;
+  font-weight: 800;
+  margin: 10px;
+  margin-bottom: 13px;
+`;
+
+const ContentBox = styled.div`
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+`;
+
+const ContentPostBox = styled.div`
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  height: 400px;
+`;
