@@ -22,8 +22,10 @@ const ProfileForm = () => {
   const { email, nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
+  //   const { currentUser } = useSelector((state) => {
+  //     return state.users;
+  //   });
   const [reNickname, setReNickname] = useState(nickname);
-  //   const [photoURL, setPhotoURL] = useState(profileImg);
   //   const [, updateState] = useState();
   //   const forceUpdate = useCallback(() => updateState({}), []);
 
@@ -40,28 +42,11 @@ const ProfileForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
-
-    // const {
-    //   target: { files, value }
-    // } = event;
-    // const theFile = files[0];
-    // const reader = new FileReader();
-    // setSelectedFile(value);
-    // reader.onloadend = (finishedEvent) => {
-    //   const {
-    //     currentTarget: { result }
-    //   } = finishedEvent;
-    //   setPhotoURL(result);
-    // };
-    // reader.readAsDataURL(theFile);
   };
 
-  //   const handleUpload = async () => {
-  //     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-  //     await uploadBytes(imageRef, selectedFile);
-  //     const downloadURL = await getDownloadURL(imageRef);
-  //     setPhotoURL(downloadURL);
-  //   };
+  //   useEffect(() => {
+  //     console.log('❤️currentUser =======> ', currentUser);
+  //   }, [currentUser]);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -70,7 +55,6 @@ const ProfileForm = () => {
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
     await uploadBytes(imageRef, selectedFile);
     const downloadURL = await getDownloadURL(imageRef);
-    // setPhotoURL(downloadURL);
 
     // 리덕스에 수정할 유저정보 전달
     dispatch(
@@ -84,27 +68,23 @@ const ProfileForm = () => {
       displayName: reNickname,
       photoURL: downloadURL
     });
+
+    navigate('/mypage');
+    // 임시방편 코드..
+    window.location.reload();
   };
 
   return (
     <>
       <form onSubmit={onSubmitHandler}>
         <S.ProfileBox>
-          <div>
-            <S.ImgBox>
-              <img src={profileImg} alt="프로필 사진" />
-            </S.ImgBox>
-            <input type="file" onChange={handleFileSelect} />
-            {/* <input type="file" id="image" /> */}
-            {/* <button onClick={handleUpload}>이미지변경 테스트버튼</button> */}
-            {/* <input type="text">이미지 선택</input> */}
-            {/* <button>이미지 제거</button> */}
-          </div>
+          {/* <div> */}
+          <S.ImgBox>
+            <img src={profileImg} alt="프로필 사진" />
+          </S.ImgBox>
+          {/* <input type="file" onChange={handleFileSelect} />
+          </div> */}
           <S.RowBox>
-            {/* <S.Row>
-                <label>프로필 사진</label>
-                <div>{email}</div>
-              </S.Row> */}
             <S.Row>
               <label>이메일</label>
               <div>{email}</div>
@@ -113,6 +93,12 @@ const ProfileForm = () => {
               <label>닉네임</label>
               <div>
                 <input type="text" defaultValue={nickname} name="nickname" onChange={onChange} />
+              </div>
+            </S.Row>
+            <S.Row>
+              <label>프로필 사진</label>
+              <div>
+                <input type="file" onChange={handleFileSelect} />
               </div>
             </S.Row>
           </S.RowBox>
