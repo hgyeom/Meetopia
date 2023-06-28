@@ -1,4 +1,4 @@
-import { collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import shortid from 'shortid';
@@ -41,29 +41,48 @@ function Comments() {
   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState([
-    {
-      text: '닉네임 123'
-    }
+    // {
+    //   text: '닉네임 123'
+    // }
   ]);
   const [comment, setComment] = useState([
-    {
-      text: '내용 1'
-    }
+    // {
+    //   text: '내용 1'
+    // }
   ]);
 
-  // const addComment = async (event) => {
-  //   event.preventDefault();
-  //   const newComment = { text: text };
-  //   setComments((prev) => {
-  //     return [...comments, newComment];
-  //   });
-  //   StyleSheetContext('');
+  const addComment = async (event) => {
+    event.preventDefault();
+    const newComment = { comment: comment, nickname: nickname };
+    setComment((prev) => {
+      return [...comments, newComment];
+    });
+    setComment('');
 
-  //   const collectionRef = collection(db, 'comments');
-  //   await addDoc(collectionRef, newComment);
-  // };
+    const collectionRef = collection(db, 'comment');
+    await addDoc(collectionRef, newComment);
+  };
 
-  // const [text, setText] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'comment'));
+      const querySnapshot = await getDocs(q);
+
+      const initialComments = [];
+
+      querySnapshot.forEach((doc) => {
+        const data = {
+          id: doc.id,
+          ...doc.data()
+        };
+        initialComments.push(data);
+      });
+      console.log(initialComments);
+      setComment(initialComments);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -99,32 +118,33 @@ function Comments() {
             }}
           />
           <br />
-          <AddBtn type="submit">등록</AddBtn>
+          <AddBtn type="submit" onClick={addComment}>
+            등록
+          </AddBtn>
         </StF>
       </div>
 
       <div>
-        {comments
-          .sort((a, b) => b - a)
-          .map((comment) => {
-            return (
-              <CommentBox key={comment?.id}>
-                <p>닉네임 : {comment.nickname}</p>
-                <p>내용 : {comment.comment}</p>
-                <DeletedBtn
-                  onClick={(event) => {
-                    event.preventDefault();
-                    dispatch({
-                      type: 'DELETE_COMMENT',
-                      payload: comment.id
-                    });
-                  }}
-                >
-                  삭제
-                </DeletedBtn>
-              </CommentBox>
-            );
-          })}
+        {comments.map((comment) => {
+          console.log(comment);
+          return (
+            <CommentBox key={comment?.commentsId}>
+              <p>닉네임 : {comment.nicknames}</p>
+              <p>내용 : {comment.comments}</p>
+              <DeletedBtn
+                onClick={(event) => {
+                  event.preventDefault();
+                  dispatch({
+                    type: 'DELETE_COMMENT',
+                    payload: comment.id
+                  });
+                }}
+              >
+                삭제
+              </DeletedBtn>
+            </CommentBox>
+          );
+        })}
       </div>
     </div>
   );

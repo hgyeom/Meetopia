@@ -3,6 +3,16 @@ const initialState = [
     commentsId: '1234@1234',
     nicknames: '랜덤 닉네임',
     comments: '내용'
+  },
+  {
+    commentsId: '1234@1234',
+    nicknames: '랜덤 닉네임',
+    comments: '내용'
+  },
+  {
+    commentsId: '1234@1234',
+    nicknames: '랜덤 닉네임',
+    comments: '내용'
   }
 ];
 
