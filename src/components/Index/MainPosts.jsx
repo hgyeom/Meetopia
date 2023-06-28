@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 
@@ -29,34 +29,49 @@ const StyledMainPost = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   padding: 20px 25px 0;
-  width: 17%;
+  width: 19%;
   height: 250px;
   background: #fff;
   border: 2px solid #d1d1d1;
   border-radius: 30px;
-  position: relative;
-  cursor: pointer;
+
   transition: 0.2s ease-in;
   &.hover {
     transform: scale(1.02);
+    cursor: pointer;
   }
 `;
 
+const StyledPostTitle = styled.div`
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  height: 35px;
+`;
+
+const StyledPostContent = styled.div`
+  font-size: 15px;
+  min-height: 100px;
+  line-height: 25px;
+  letter-spacing: -0.05em;
+  margin: 10px 0 10px;
+
+  // 말줄임을 위한 css
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  /* word-break: break-all; */
+  overflow: hidden;
+`;
+
+const StyledPostUser = styled.div``;
 function List() {
-  // const dispatch = useDispatch();
-  // redux 사용시
-  // const posts = useSelector((state) => state);
-  // useEffect(() => {
-  // dispatch({
-  //   type: 'READ_ALL_POSTS',
-  //   payload: ''
-  // });
-  // console.log(posts);},[])
-
   const [posts, setPosts] = useState([]);
+  const category = useSelector((state) => state.category);
 
+  // firebase 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
       const q = query(collection(db, 'posts'));
@@ -70,8 +85,6 @@ function List() {
     fetchData();
   }, []);
 
-  console.log(posts);
-
   return (
     <StyledMain>
       <StyledMainNav>
@@ -82,15 +95,35 @@ function List() {
         <button>dd</button>
       </StyledMainNav>
       <StyledMainposts>
-        {posts.map((post) => {
-          return (
-            <StyledMainPost key={post.postId}>
-              <p>{post.title}</p>
-              <p>{post.userId}</p>
-              <p>{post.category}</p>
-            </StyledMainPost>
-          );
-        })}
+        {category !== '모두보기'
+          ? posts
+              .filter((item) => item.category === category)
+              .map((post) => {
+                return (
+                  <StyledMainPost key={post.postId}>
+                    <StyledPostTitle>{post.title}</StyledPostTitle>
+                    <div>
+                      <StyledPostContent>{post.content}</StyledPostContent>
+                      <hr />
+                      <StyledPostUser>{post.nickname}</StyledPostUser>
+                      <p>{post.category}</p>
+                    </div>
+                  </StyledMainPost>
+                );
+              })
+          : posts.map((post) => {
+              return (
+                <StyledMainPost key={post.postId}>
+                  <StyledPostTitle>{post.title}</StyledPostTitle>
+                  <div>
+                    <StyledPostContent>{post.content}</StyledPostContent>
+                    <hr />
+                    <StyledPostUser>{post.nickname}</StyledPostUser>
+                    <p>{post.category}</p>
+                  </div>
+                </StyledMainPost>
+              );
+            })}
       </StyledMainposts>
     </StyledMain>
   );

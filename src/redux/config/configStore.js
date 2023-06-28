@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import users from '../modules/users';
 import posts from '../modules/posts';
-
+import category from '../modules/category';
 /*
 1. createStore()
 리덕스의 가장 핵심이 되는 스토어를 만드는 메소드(함수) 입니다. 
@@ -19,7 +19,8 @@ combineReducers은 여러 개의 독립적인 reducer의 반환 값을 하나의
 
 const rootReducer = combineReducers({
   users,
-  posts
+  posts,
+  category
 });
 const store = createStore(rootReducer);
 
