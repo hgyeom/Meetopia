@@ -3,6 +3,102 @@ import { styled } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
+import Location from './Location';
+
+function List() {
+  const [posts, setPosts] = useState([]);
+  const category = useSelector((state) => state.category);
+  const location = useSelector((state) => state.location);
+
+  // firebase 데이터 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'posts'));
+      const querySnapshot = await getDocs(q);
+      const initialPosts = [];
+      querySnapshot.forEach((doc) => {
+        initialPosts.push({ id: doc.id, ...doc.data() });
+      });
+      setPosts(initialPosts);
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <StyledMain>
+      <StyledMainNav>
+        <Location />
+        <button>dd</button>
+      </StyledMainNav>
+      <StyledMainposts>
+        {category !== '모두보기'
+          ? location !== '모두보기'
+            ? posts
+                .filter((item) => item.category === category)
+                .filter((item) => item.location === location)
+                .map((post) => {
+                  return (
+                    <StyledMainPost key={post.postId}>
+                      <StyledPostTitle>{post.title}</StyledPostTitle>
+                      <div>
+                        <StyledPostContent>{post.content}</StyledPostContent>
+                        <hr />
+                        <StyledPostUser>{post.nickname}</StyledPostUser>
+                        <p>{post.category}</p>
+                      </div>
+                    </StyledMainPost>
+                  );
+                })
+            : posts
+                .filter((item) => item.category === category)
+                .map((post) => {
+                  return (
+                    <StyledMainPost key={post.postId}>
+                      <StyledPostTitle>{post.title}</StyledPostTitle>
+                      <div>
+                        <StyledPostContent>{post.content}</StyledPostContent>
+                        <hr />
+                        <StyledPostUser>{post.nickname}</StyledPostUser>
+                        <p>{post.category}</p>
+                      </div>
+                    </StyledMainPost>
+                  );
+                })
+          : location !== '모두보기'
+          ? posts
+              .filter((item) => item.location === location)
+              .map((post) => {
+                return (
+                  <StyledMainPost key={post.postId}>
+                    <StyledPostTitle>{post.title}</StyledPostTitle>
+                    <div>
+                      <StyledPostContent>{post.content}</StyledPostContent>
+                      <hr />
+                      <StyledPostUser>{post.nickname}</StyledPostUser>
+                      <p>{post.category}</p>
+                    </div>
+                  </StyledMainPost>
+                );
+              })
+          : posts.map((post) => {
+              return (
+                <StyledMainPost key={post.postId}>
+                  <StyledPostTitle>{post.title}</StyledPostTitle>
+                  <div>
+                    <StyledPostContent>{post.content}</StyledPostContent>
+                    <hr />
+                    <StyledPostUser>{post.nickname}</StyledPostUser>
+                    <p>{post.category}</p>
+                  </div>
+                </StyledMainPost>
+              );
+            })}
+      </StyledMainposts>
+    </StyledMain>
+  );
+}
+
+export default List;
 
 const StyledMain = styled.main``;
 
@@ -62,71 +158,7 @@ const StyledPostContent = styled.div`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-  /* word-break: break-all; */
   overflow: hidden;
 `;
 
 const StyledPostUser = styled.div``;
-function List() {
-  const [posts, setPosts] = useState([]);
-  const category = useSelector((state) => state.category);
-
-  // firebase 데이터 가져오기
-  useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, 'posts'));
-      const querySnapshot = await getDocs(q);
-      const initialPosts = [];
-      querySnapshot.forEach((doc) => {
-        initialPosts.push({ id: doc.id, ...doc.data() });
-      });
-      setPosts(initialPosts);
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <StyledMain>
-      <StyledMainNav>
-        <select>
-          <option>경기</option>
-          <option>서울</option>
-        </select>
-        <button>dd</button>
-      </StyledMainNav>
-      <StyledMainposts>
-        {category !== '모두보기'
-          ? posts
-              .filter((item) => item.category === category)
-              .map((post) => {
-                return (
-                  <StyledMainPost key={post.postId}>
-                    <StyledPostTitle>{post.title}</StyledPostTitle>
-                    <div>
-                      <StyledPostContent>{post.content}</StyledPostContent>
-                      <hr />
-                      <StyledPostUser>{post.nickname}</StyledPostUser>
-                      <p>{post.category}</p>
-                    </div>
-                  </StyledMainPost>
-                );
-              })
-          : posts.map((post) => {
-              return (
-                <StyledMainPost key={post.postId}>
-                  <StyledPostTitle>{post.title}</StyledPostTitle>
-                  <div>
-                    <StyledPostContent>{post.content}</StyledPostContent>
-                    <hr />
-                    <StyledPostUser>{post.nickname}</StyledPostUser>
-                    <p>{post.category}</p>
-                  </div>
-                </StyledMainPost>
-              );
-            })}
-      </StyledMainposts>
-    </StyledMain>
-  );
-}
-
-export default List;

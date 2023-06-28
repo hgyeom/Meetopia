@@ -9,7 +9,7 @@ function DetailViewPost() {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   //firebase 'posts' 데이터 읽어오기
   useEffect(() => {

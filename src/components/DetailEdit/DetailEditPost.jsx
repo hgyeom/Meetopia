@@ -1,4 +1,4 @@
-import { addDoc, collection, query, getDocs } from 'firebase/firestore';
+import { addDoc, collection, query, getDocs, doc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { styled } from 'styled-components';
@@ -123,7 +123,6 @@ function DetailEditPost() {
   };
 
   //수정버튼 누르면 수정할 수 있는 page
-  //..
 
   return (
     <div style={{ margin: '30px' }}>
