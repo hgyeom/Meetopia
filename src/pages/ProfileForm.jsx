@@ -22,12 +22,7 @@ const ProfileForm = () => {
   const { email, nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
-  //   const { currentUser } = useSelector((state) => {
-  //     return state.users;
-  //   });
   const [reNickname, setReNickname] = useState(nickname);
-  //   const [, updateState] = useState();
-  //   const forceUpdate = useCallback(() => updateState({}), []);
 
   // 메서드
   const onChange = ({ target }) => {
@@ -44,10 +39,6 @@ const ProfileForm = () => {
     setSelectedFile(event.target.files[0]);
   };
 
-  //   useEffect(() => {
-  //     console.log('❤️currentUser =======> ', currentUser);
-  //   }, [currentUser]);
-
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -57,14 +48,13 @@ const ProfileForm = () => {
     const downloadURL = await getDownloadURL(imageRef);
 
     // 리덕스에 수정할 유저정보 전달
-    console.log('디스패치 전 => ');
     dispatch(
       updateCurrentUser({
         nickname: reNickname,
         profileImg: downloadURL
       })
     );
-    console.log('디스패치 후 => ');
+
     // 파이어베이스에 수정할 유저정보 전달
     await updateProfile(auth.currentUser, {
       displayName: reNickname,

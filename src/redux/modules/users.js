@@ -39,7 +39,8 @@ const initialState = {
 // Reducer
 const users = (state = initialState, action) => {
   switch (action.type) {
-    case updateCurrentUser:
+    case UPDATE_CURRENT_USER:
+      console.log('지나감333');
       return {
         ...state,
         currentUser: { ...state.currentUser, ...action.payload }

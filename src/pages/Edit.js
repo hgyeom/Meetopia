@@ -8,7 +8,6 @@ const Edit = () => {
       <S.MypageContainer>
         <S.Title>Mypage</S.Title>
         <S.SubTitle>회원 정보 수정</S.SubTitle>
-
         <ProfileForm />
       </S.MypageContainer>
     </div>
