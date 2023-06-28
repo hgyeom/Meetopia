@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
+import Comments from '../comments/CommentsPage';
+
 // import Layout from './Layout';
 
 const Router = () => {
@@ -9,6 +11,7 @@ const Router = () => {
       {/* <Layout> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<Comments />} />
       </Routes>
       {/* </Layout> */}
     </BrowserRouter>
