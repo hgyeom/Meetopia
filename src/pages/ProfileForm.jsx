@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth, storage } from '../firebase';
-import { onAuthStateChangphotoURLed, updateProfile } from 'firebase/auth';
+import { updateProfile } from 'firebase/auth';
 import { updateCurrentUser } from '../redux/modules/users';
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -57,21 +57,24 @@ const ProfileForm = () => {
     const downloadURL = await getDownloadURL(imageRef);
 
     // 리덕스에 수정할 유저정보 전달
+    console.log('디스패치 전 => ');
     dispatch(
       updateCurrentUser({
         nickname: reNickname,
         profileImg: downloadURL
       })
     );
+    console.log('디스패치 후 => ');
     // 파이어베이스에 수정할 유저정보 전달
     await updateProfile(auth.currentUser, {
       displayName: reNickname,
       photoURL: downloadURL
     });
 
-    navigate('/mypage');
+    // navigate('/mypage');
+
     // 임시방편 코드..
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

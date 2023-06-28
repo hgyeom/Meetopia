@@ -18,6 +18,7 @@ const Router = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log('지나감 => ', user);
       dispatch(
         addCurrentUser({
           userid: user.uid,
