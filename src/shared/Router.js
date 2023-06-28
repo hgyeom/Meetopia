@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Mypage from '../pages/Mypage';
 import Edit from '../pages/Edit';
+import Comments from '../comments/CommentsPage';
+import Detail from '../pages/Detail';
+import DetailEdit from '../pages/DetailEdit';
 // import Layout from './Layout';
 
 import { auth } from '../firebase';
@@ -41,6 +44,9 @@ const Router = () => {
         {/* <Route path="/users/:id" element={<Mypage />} /> */}
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/edit" element={<Edit />} />
+        <Route path="/:id" element={<Comments />} />
+        <Route path="/detail" element={<DetailEdit />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
       {/* </Layout> */}
     </BrowserRouter>
