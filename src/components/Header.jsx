@@ -45,7 +45,17 @@ function Header() {
     <StyledHeader>
       <StyledLink to="/">MEETOPIA</StyledLink>
       <StyledHeaderNav>
-        <StyledHeaderNavButton>새 글 쓰기</StyledHeaderNavButton>
+        <StyledHeaderNavButton>
+          <Link
+            to="/detail"
+            style={{
+              textDecoration: 'none',
+              color: 'black'
+            }}
+          >
+            새 글 쓰기
+          </Link>
+        </StyledHeaderNavButton>
         <StyledHeaderNavButton>로그인</StyledHeaderNavButton>
       </StyledHeaderNav>
     </StyledHeader>

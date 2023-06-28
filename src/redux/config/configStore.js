@@ -21,7 +21,7 @@ combineReducers은 여러 개의 독립적인 reducer의 반환 값을 하나의
 
 const rootReducer = combineReducers({
   users,
-  comments: comments
+  comments: comments,
   posts,
   category,
   location
