@@ -5,9 +5,6 @@ import shortid from 'shortid';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
 
-// import { collection } from 'firebase/firestore';
-// import { addDoc, collection, getDocs, query } from 'firebase';
-
 // ----------------------------------styled-component---------------------------
 const StF = styled.form`
   display: flex;
@@ -31,13 +28,14 @@ const DeletedBtn = styled.button`
   background-color: white;
   border: none;
 `;
-// ----------------------------------styled-component---------------------------
+// ----------------------------------styled-component------------------------------
 
+// -------------------------------------useState관리--------------------------------
 function Comments() {
   // const post = pots.filter((post) => post.id === id)[0];
 
   const comments = useSelector((state) => state.comments);
-
+  console.log(comments, '핫');
   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState([
@@ -51,6 +49,9 @@ function Comments() {
     // }
   ]);
 
+  // -------------------------------------useState관리-------------------------------------
+
+  // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
     const newComment = { comment: comment, nickname: nickname };
@@ -58,6 +59,15 @@ function Comments() {
       return [...comments, newComment];
     });
     setComment('');
+    dispatch({
+      type: 'ADD_COMMENT',
+      payload: {
+        nickname: nickname,
+        comment: comment,
+        id: shortid.generate(),
+        postId: '1'
+      }
+    });
 
     const collectionRef = collection(db, 'comment');
     await addDoc(collectionRef, newComment);
@@ -79,28 +89,35 @@ function Comments() {
       });
       console.log(initialComments);
       setComment(initialComments);
+      // useEffect(() => {
+      dispatch({
+        type: 'InitialState',
+        payload: initialComments
+      });
+      // }, []);
     };
 
     fetchData();
   }, []);
+  // ----------------------------------------데이터 추가하기----------------------------------
 
   return (
     <div>
       <div>
         <h3>댓글</h3>
         <StF
-          onSubmit={(event) => {
-            event.preventDefault();
-            dispatch({
-              type: 'ADD_COMMENT',
-              payload: {
-                nickname: nickname,
-                comment: comment,
-                id: shortid.generate(),
-                postId: '1'
-              }
-            });
-          }}
+        // onSubmit={(event) => {
+        //   event.preventDefault();
+        //   dispatch({
+        //     type: 'ADD_COMMENT',
+        //     payload: {
+        //       nickname: nickname,
+        //       comment: comment,
+        //       id: shortid.generate(),
+        //       postId: '1'
+        //     }
+        //   });
+        // }}
         >
           <input
             name="닉네임"
@@ -129,8 +146,8 @@ function Comments() {
           console.log(comment);
           return (
             <CommentBox key={comment?.commentsId}>
-              <p>닉네임 : {comment.nicknames}</p>
-              <p>내용 : {comment.comments}</p>
+              <p>닉네임 : {comment.nickname}</p>
+              <p>내용 : {comment.comment}</p>
               <DeletedBtn
                 onClick={(event) => {
                   event.preventDefault();
