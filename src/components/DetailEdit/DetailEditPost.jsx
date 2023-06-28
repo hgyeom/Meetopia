@@ -2,7 +2,7 @@ import { addDoc, collection, query, getDocs } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { styled } from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 function DetailEditPost() {
   const [posts, setPosts] = useState([]);
@@ -14,8 +14,15 @@ function DetailEditPost() {
   const [selectLocation, setSelectLocation] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  //firebase 'posts' 데이터 읽어오기
+  //postId 값 가져오기
+  const postId = location.state?.postId;
+  useEffect(() => {
+    console.log(postId);
+  }, []);
+
+  //fireStore 'posts' 데이터 읽어오기
   useEffect(() => {
     const fetchData = async () => {
       const q = query(collection(db, 'posts'));
@@ -41,7 +48,6 @@ function DetailEditPost() {
     { value: '반려동물', name: '반려동물' },
     { value: '기타', name: '기타' }
   ];
-
   // 지역별 select 박스
   const selectLocationList = [
     { value: '없음', name: '==선택==' },
@@ -63,6 +69,7 @@ function DetailEditPost() {
     { value: '제주', name: '제주' }
   ];
 
+  //---------------------------------------
   //주제별 select 박스 값
   const handleSelectTopic = (event) => {
     setSelectTopic(event.target.value);
@@ -116,7 +123,7 @@ function DetailEditPost() {
   };
 
   //수정버튼 누르면 수정할 수 있는 page
-  console.log(posts);
+  //..
 
   return (
     <div style={{ margin: '30px' }}>

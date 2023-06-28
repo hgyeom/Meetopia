@@ -9,7 +9,7 @@ function DetailViewPost() {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  // console.log(id);
+  console.log(id);
 
   //firebase 'posts' 데이터 읽어오기
   useEffect(() => {
@@ -30,7 +30,11 @@ function DetailViewPost() {
 
   //수정 버튼 누르면 수정하는 페이지로
   const onEditButton = () => {
-    navigate(`/detail`);
+    navigate(`/detail`, {
+      state: {
+        postId: id
+      }
+    });
   };
 
   return (
