@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
+import { changeCategory } from '../../redux/modules/category';
 
 /* styled components */
 
@@ -38,37 +40,47 @@ const StlyedHr = styled.hr`
 
 function Category() {
   const [index, setIndex] = useState(0);
+  const dispatch = useDispatch();
 
   const categorys = [
     {
       id: 0,
-      title: '공부'
+      category: '모두보기'
     },
     {
       id: 1,
-      title: '스포츠'
+      category: '공부'
     },
     {
       id: 2,
-      title: '음악'
+      category: '스포츠'
     },
     {
       id: 3,
-      title: '영화'
+      category: '음악'
     },
     {
       id: 4,
-      title: '프로그래밍'
+      category: '영화'
     },
     {
       id: 5,
-      title: '반려동물'
+      category: '프로그래밍'
     },
     {
       id: 6,
-      title: '기타'
+      category: '반려동물'
+    },
+    {
+      id: 7,
+      category: '기타'
     }
   ];
+
+  const setCategory = (id, category) => {
+    setIndex(id);
+    dispatch(changeCategory(category));
+  };
 
   return (
     <StyledCategorySection>
@@ -77,9 +89,9 @@ function Category() {
           <StyledCategory
             key={item.id}
             className={index === item.id ? 'active' : null}
-            onClick={() => setIndex(item.id)}
+            onClick={() => setCategory(item.id, item.category)}
           >
-            {item.title}
+            {item.category}
           </StyledCategory>
         ))}
       </StyledCategoryList>
