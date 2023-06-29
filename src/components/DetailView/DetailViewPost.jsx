@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -6,14 +6,15 @@ import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 
 function DetailViewPost() {
-  const { nickname } = useSelector((state) => {
+  const { nickname, userid } = useSelector((state) => {
     return state.users.currentUser;
   });
   const [posts, setPosts] = useState([]);
+  const [postUserid, setPostUserid] = useState('');
+  const [postNickname, setPostNickname] = useState('');
 
   const navigate = useNavigate();
   const { id } = useParams();
-  // console.log(id);
 
   //firebase 'posts' 데이터 읽어오기
   useEffect(() => {
@@ -26,11 +27,17 @@ function DetailViewPost() {
         initialPosts.push({ id: doc.id, ...doc.data() });
       });
       setPosts(initialPosts);
+
+      // 포스트의 유저아이디값 저장하기
+      let filtered = initialPosts.find((item) => item.id === id);
+      setPostUserid(filtered.userid);
+      setPostNickname(filtered.nickname || '닉네임없음');
     };
     fetchData();
   }, []);
 
   const post = posts.find((item) => item.id === id);
+  console.log('posts', posts);
 
   //수정 버튼 누르면 수정하는 페이지로
   const onEditButton = () => {
@@ -39,6 +46,17 @@ function DetailViewPost() {
         postId: id
       }
     });
+  };
+
+  // 👇👇👇👇👇👇
+  const onDelButton = async () => {
+    // DB에서 삭제
+    console.log(id);
+    const todoRef = doc(db, 'posts', id);
+    await deleteDoc(todoRef);
+
+    // navigate(-1);
+    navigate('/');
   };
 
   return (
@@ -51,12 +69,14 @@ function DetailViewPost() {
         <div>
           <PostTitle>{post?.title}</PostTitle>
           <ContentBox>
-            <label>작성자명:{nickname}</label>
+            {/* <label>작성자명:{nickname}</label> */}
+            <label>작성자명:{postNickname}</label>
             {/* 작성자이름 받아오기 */}
             <label>작성일:</label>
             {post?.days}
 
-            <button onClick={onEditButton}>수정</button>
+            {userid == postUserid ? <button onClick={onEditButton}>수정</button> : null}
+            {userid == postUserid ? <button onClick={onDelButton}>삭제</button> : null}
           </ContentBox>
         </div>
         <ContentBox>

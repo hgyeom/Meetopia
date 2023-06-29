@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 import Location from './Location';
+import { useNavigate } from 'react-router';
 import { filterdPosts, initialData } from '../../redux/modules/posts';
 
 function List() {
+  const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
@@ -41,7 +43,12 @@ function List() {
       <StyledMainposts>
         {posts.map((post) => {
           return (
-            <StyledMainPost key={post.postId}>
+            <StyledMainPost
+              key={post.postId}
+              onClick={() => {
+                navigate('/detail/' + post.id);
+              }}
+            >
               <StyledPostTitle>{post.title}</StyledPostTitle>
               <div>
                 <StyledPostContent>{post.content}</StyledPostContent>

@@ -12,6 +12,7 @@ export const StyledMainPost = styled.div`
   border: 2px solid #d1d1d1;
   border-radius: 30px;
   background: #fff;
+  cursor: pointer;
 
   transition: 0.2s ease-in;
   &.hover {

@@ -1,9 +1,16 @@
 import React from 'react';
 import * as S from './PostItem.styled';
+import { useNavigate } from 'react-router';
 
 const PostItem = ({ post }) => {
+  const navigate = useNavigate();
+
   return (
-    <S.StyledMainPost>
+    <S.StyledMainPost
+      onClick={() => {
+        navigate('/detail/' + post.id);
+      }}
+    >
       <S.StyledPostTitle>{post.title}</S.StyledPostTitle>
       <div>
         <S.StyledPostContent>{post.content}</S.StyledPostContent>
