@@ -3,7 +3,7 @@ import * as S from './PostItem.styled';
 
 const PostItem = ({ post }) => {
   return (
-    <S.StyledMainPost key={post.postId}>
+    <S.StyledMainPost>
       <S.StyledPostTitle>{post.title}</S.StyledPostTitle>
       <div>
         <S.StyledPostContent>{post.content}</S.StyledPostContent>
