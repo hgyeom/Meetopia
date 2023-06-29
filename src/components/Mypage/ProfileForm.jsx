@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth, storage } from '../../firebase';
 import { updateProfile } from 'firebase/auth';
@@ -23,6 +23,10 @@ const ProfileForm = () => {
     return state.users.currentUser;
   });
   const [reNickname, setReNickname] = useState(nickname);
+  const [previewImg, setPreviewImg] = useState(profileImg);
+  useEffect(() => {
+    setPreviewImg(profileImg);
+  }, [profileImg]);
 
   // 메서드
   const onChange = ({ target }) => {
@@ -35,17 +39,34 @@ const ProfileForm = () => {
 
   // 파일 업로드
   const [selectedFile, setSelectedFile] = useState(null);
+  let theFile;
   const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0]);
+    theFile = event.target.files[0];
+
+    if (!theFile) return;
+    setSelectedFile(theFile);
+
+    // 프로필이미지 미리보기
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result }
+      } = finishedEvent;
+      setPreviewImg(result);
+    };
+    reader.readAsDataURL(theFile);
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
-    // 파이어스토어에 이미지 전달
-    const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-    await uploadBytes(imageRef, selectedFile);
-    const downloadURL = await getDownloadURL(imageRef);
+    let downloadURL;
+    if (!theFile) {
+      // 파이어스토어에 이미지 전달
+      const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
+      await uploadBytes(imageRef, selectedFile);
+      downloadURL = await getDownloadURL(imageRef);
+    }
 
     // 리덕스에 수정할 유저정보 전달
     dispatch(
@@ -62,9 +83,6 @@ const ProfileForm = () => {
     });
 
     // navigate('/mypage');
-
-    // 임시방편 코드..
-    // window.location.reload();
   };
 
   return (
@@ -73,7 +91,7 @@ const ProfileForm = () => {
         <S.ProfileBox>
           {/* <div> */}
           <S.ImgBox>
-            <img src={profileImg} alt="프로필 사진" />
+            <img src={previewImg} alt="프로필 사진" />
           </S.ImgBox>
           {/* <input type="file" onChange={handleFileSelect} />
           </div> */}
