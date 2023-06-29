@@ -39,11 +39,6 @@ function Comments() {
   console.log(comments, '핫');
   const dispatch = useDispatch();
 
-  const [nickname, setNickname] = useState([
-    // {
-    //   text: '닉네임 123'
-    // }
-  ]);
   const [comment, setComment] = useState([
     // {
     //   text: '내용 1'
@@ -55,18 +50,19 @@ function Comments() {
   // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
-    const newComment = { comment: comment, nickname: nickname };
+    const nickname = 's닉네임';
+    const postId = '1';
+    const newComment = { comment, nickname, postId };
     setComment(() => {
       return [...comments, newComment];
     });
-    setComment('');
     dispatch({
       type: 'ADD_COMMENT',
       payload: {
         nickname: nickname,
         comment: comment,
         id: shortid.generate(),
-        postId: '1'
+        postId
       }
     });
 
@@ -134,13 +130,13 @@ function Comments() {
         //   });
         // }}
         >
-          <input
+          {/* <input
             name="닉네임"
             value={nickname}
             onChange={(event) => {
               setNickname(event.target.value);
             }}
-          />
+          /> */}
           <br />
           <input
             name="내용"
