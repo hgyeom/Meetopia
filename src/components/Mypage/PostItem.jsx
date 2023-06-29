@@ -1,6 +1,5 @@
 import React from 'react';
 import * as S from './PostItem.styled';
-import uuid from 'react-uuid';
 
 const PostItem = ({ post }) => {
   return (
