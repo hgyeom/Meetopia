@@ -4,8 +4,11 @@ import { useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 import Location from './Location';
+import { useNavigate } from 'react-router';
 
 function List() {
+  const navigate = useNavigate();
+
   const [posts, setPosts] = useState([]);
   const category = useSelector((state) => state.category);
   const location = useSelector((state) => state.location);
@@ -23,6 +26,12 @@ function List() {
     };
     fetchData();
   }, []);
+  console.log('➡️posts', posts);
+
+  // const onClickPost = (event) => {
+  //   console.log('-------------------------');
+  //   console.log('키 test ::::::::: ', event.target.getAttribute('key'));
+  // };
 
   return (
     <>
@@ -91,7 +100,12 @@ function List() {
                 })
             : posts.map((post) => {
                 return (
-                  <StyledMainPost key={post.postId}>
+                  <StyledMainPost
+                    key={post.postId}
+                    onClick={() => {
+                      navigate('/detail/' + post.id);
+                    }}
+                  >
                     <StyledPostTitle>{post.title}</StyledPostTitle>
                     <div>
                       <StyledPostContent>{post.content}</StyledPostContent>
