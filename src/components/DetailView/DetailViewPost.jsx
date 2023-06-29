@@ -3,8 +3,12 @@ import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { db } from '../../firebase';
+import { useSelector } from 'react-redux';
 
 function DetailViewPost() {
+  const { nickname } = useSelector((state) => {
+    return state.users.currentUser;
+  });
   const [posts, setPosts] = useState([]);
 
   const navigate = useNavigate();
@@ -47,7 +51,7 @@ function DetailViewPost() {
         <div>
           <PostTitle>{post?.title}</PostTitle>
           <ContentBox>
-            <label>작성자명:</label>
+            <label>작성자명:{nickname}</label>
             {/* 작성자이름 받아오기 */}
             <label>작성일:</label>
             {post?.days}
