@@ -102,6 +102,7 @@ function Comments() {
   }, []);
   // ----------------------------------------데이터 추가하기----------------------------------
 
+  // ----------------------------------------데이터 삭제하기----------------------------------
   const deleteComment = async (id) => {
     const collectionRef = collection(db, 'comment');
     const commentRef = doc(collectionRef, id);
@@ -113,6 +114,7 @@ function Comments() {
       payload: id
     });
   };
+  // ----------------------------------------데이터 삭제하기----------------------------------
 
   return (
     <div>
