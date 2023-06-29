@@ -43,6 +43,7 @@ const ProfileForm = () => {
   const handleFileSelect = (event) => {
     theFile = event.target.files[0];
 
+    // theFile이 falsy할때 통과
     if (!theFile) return;
     setSelectedFile(theFile);
 
@@ -61,28 +62,42 @@ const ProfileForm = () => {
     event.preventDefault();
 
     let downloadURL;
+
     if (!theFile) {
+      // 리덕스에 수정할 유저정보 전달
+      dispatch(
+        updateCurrentUser({
+          nickname: reNickname
+        })
+      );
+
+      // 파이어베이스에 수정할 유저정보 전달
+      await updateProfile(auth.currentUser, {
+        displayName: reNickname
+      });
+    } else {
+      console.log('theFile 통과', theFile);
       // 파이어스토어에 이미지 전달
       const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
       await uploadBytes(imageRef, selectedFile);
       downloadURL = await getDownloadURL(imageRef);
+
+      // 리덕스에 수정할 유저정보 전달
+      dispatch(
+        updateCurrentUser({
+          nickname: reNickname,
+          profileImg: downloadURL
+        })
+      );
+
+      // 파이어베이스에 수정할 유저정보 전달
+      await updateProfile(auth.currentUser, {
+        displayName: reNickname,
+        photoURL: downloadURL
+      });
     }
 
-    // 리덕스에 수정할 유저정보 전달
-    dispatch(
-      updateCurrentUser({
-        nickname: reNickname,
-        profileImg: downloadURL
-      })
-    );
-
-    // 파이어베이스에 수정할 유저정보 전달
-    await updateProfile(auth.currentUser, {
-      displayName: reNickname,
-      photoURL: downloadURL
-    });
-
-    // navigate('/mypage');
+    navigate('/mypage');
   };
 
   return (

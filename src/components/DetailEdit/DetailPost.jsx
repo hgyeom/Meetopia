@@ -88,7 +88,7 @@ function DetailPost() {
       content: content,
       category: selectTopic,
       location: selectLocation,
-      userId: userid,
+      userid: userid,
       nickname: nickname,
       days: today.toLocaleString()
     };
