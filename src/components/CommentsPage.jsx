@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import shortid from 'shortid';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 // ----------------------------------styled-component---------------------------
 const StF = styled.form`
@@ -101,6 +102,18 @@ function Comments() {
   }, []);
   // ----------------------------------------데이터 추가하기----------------------------------
 
+  const deleteComment = async (id) => {
+    const collectionRef = collection(db, 'comment');
+    const commentRef = doc(collectionRef, id);
+
+    await deleteDoc(commentRef);
+
+    dispatch({
+      type: 'DELETE_COMMENT',
+      payload: id
+    });
+  };
+
   return (
     <div>
       <div>
@@ -149,12 +162,8 @@ function Comments() {
               <p>닉네임 : {comment.nickname}</p>
               <p>내용 : {comment.comment}</p>
               <DeletedBtn
-                onClick={(event) => {
-                  event.preventDefault();
-                  dispatch({
-                    type: 'DELETE_COMMENT',
-                    payload: comment.id
-                  });
+                onClick={() => {
+                  deleteComment(comment.id);
                 }}
               >
                 삭제
