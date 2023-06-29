@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Mypage from '../pages/Mypage';
 import Edit from '../pages/MypageEdit';
-import Comments from '../comments/CommentsPage';
+import Comments from '../components/CommentsPage';
 import Detail from '../pages/Detail';
 import DetailEdit from '../pages/DetailEdit';
 import DetailUpdate from '../components/DetailEdit/DetailUpdate';
