@@ -55,7 +55,7 @@ function Comments() {
   const addComment = async (event) => {
     event.preventDefault();
     const newComment = { comment: comment, nickname: nickname };
-    setComment((prev) => {
+    setComment(() => {
       return [...comments, newComment];
     });
     setComment('');
