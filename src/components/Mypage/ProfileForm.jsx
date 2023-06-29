@@ -43,27 +43,30 @@ const ProfileForm = () => {
   const handleFileSelect = (event) => {
     theFile = event.target.files[0];
 
-    // theFile이 falsy할때 통과
-    if (!theFile) return;
     setSelectedFile(theFile);
-
-    // 프로필이미지 미리보기
-    const reader = new FileReader();
-    reader.onloadend = (finishedEvent) => {
-      const {
-        currentTarget: { result }
-      } = finishedEvent;
-      setPreviewImg(result);
-    };
-    reader.readAsDataURL(theFile);
+    console.log('❤️theFile', theFile);
+    // theFile이 falsy할때 통과
+    if (theFile) {
+      // 프로필이미지 미리보기
+      const reader = new FileReader();
+      reader.onloadend = (finishedEvent) => {
+        const {
+          currentTarget: { result }
+        } = finishedEvent;
+        setPreviewImg(result);
+      };
+      reader.readAsDataURL(theFile);
+    }
+    console.log('❤️❤️theFile2', theFile);
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     let downloadURL;
+    console.log('❤️❤️❤️❤️downloadURL', downloadURL);
 
-    if (!theFile) {
+    if (!selectedFile) {
       // 리덕스에 수정할 유저정보 전달
       dispatch(
         updateCurrentUser({
