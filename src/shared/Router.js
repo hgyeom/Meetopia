@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
+import Login from '../components/LoginPage/login';
+import Signup from '../components/LoginPage/signup';
 import Mypage from '../pages/Mypage';
 import Edit from '../pages/MypageEdit';
 import Comments from '../comments/CommentsPage';
@@ -41,6 +43,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/users/:id" element={<Mypage />} /> */}
+        <Route path="./login" element={<Login />}/>
+        <Route path="./signup" element={<Signup />}/>
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/edit" element={<Edit />} />
         <Route path="/:id" element={<Comments />} />
