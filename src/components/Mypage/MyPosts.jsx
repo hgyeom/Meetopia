@@ -10,9 +10,7 @@ const MyPosts = () => {
   const [posts, setPosts] = useState([]);
 
   // firebase 데이터 가져오기
-  const { userid } = useSelector((state) => {
-    return state.users.currentUser;
-  });
+  const { userid } = useSelector((state) => state.users.currentUser);
 
   useEffect(() => {
     const fetchData = async () => {
