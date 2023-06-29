@@ -4,8 +4,14 @@ import { db } from '../../firebase';
 import { styled } from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
 import shortid from 'shortid';
+import { useSelector } from 'react-redux';
 
 function DetailPost() {
+  const { nickname, userid } = useSelector((state) => {
+    return state.users.currentUser;
+  });
+
+  // console.log(nickname, userid);
   const [posts, setPosts] = useState([]);
 
   const [title, setTitle] = useState('');
@@ -82,6 +88,8 @@ function DetailPost() {
       content: content,
       category: selectTopic,
       location: selectLocation,
+      userId: userid,
+      nickname: nickname,
       days: today.toLocaleString()
     };
     if (!title || !content || selectTopic === '' || selectLocation === '') {
@@ -110,8 +118,6 @@ function DetailPost() {
           <ContentBox>
             <label>제목: </label>
             <input type="text" name="title" value={title} onChange={onChange} />
-            <label>작성자명:</label>
-            <input />
           </ContentBox>
           <ContentBox>
             주제별:
