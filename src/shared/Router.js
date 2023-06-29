@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Mypage from '../pages/Mypage';
-import Edit from '../pages/Edit';
+import Edit from '../pages/MypageEdit';
 import Comments from '../comments/CommentsPage';
 import Detail from '../pages/Detail';
 import DetailEdit from '../pages/DetailEdit';

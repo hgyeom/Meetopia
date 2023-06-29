@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, storage } from '../firebase';
+import { auth, storage } from '../../firebase';
 import { updateProfile } from 'firebase/auth';
-import { updateCurrentUser } from '../redux/modules/users';
+import { updateCurrentUser } from '../../redux/modules/users';
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { S } from './Profile.styled';

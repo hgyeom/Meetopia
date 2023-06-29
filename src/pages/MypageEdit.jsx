@@ -1,6 +1,6 @@
 import React from 'react';
-import ProfileForm from './ProfileForm';
-import { S } from './Mypage.styled';
+import ProfileForm from '../components/Mypage/ProfileForm';
+import { S } from '../components/Mypage/Mypage.styled';
 
 const Edit = () => {
   return (
