@@ -56,6 +56,7 @@ function Comments() {
     setComment(() => {
       return [...comments, newComment];
     });
+    setComment('');
     dispatch({
       type: 'ADD_COMMENT',
       payload: {
