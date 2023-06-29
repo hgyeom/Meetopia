@@ -21,7 +21,7 @@ const Mypage = () => {
   // useEffect(() => {
   //   // 1. 로그인하기
   //   // 테스트용 임시 로그인상태 만들기
-  //   let [testEmail, testPassword] = ['test@gmail.com', '12341234'];
+  //   let [testEmail, testPassword] = ['asdf@asdf.com', '12341234'];
   //   const signIn = async (event) => {
   //     try {
   //       const userCredential = await signInWithEmailAndPassword(auth, testEmail, testPassword);

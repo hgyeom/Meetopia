@@ -4,8 +4,13 @@ import { db } from '../../firebase';
 import { styled } from 'styled-components';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import Header from '../Header';
+import { useSelector } from 'react-redux';
 
 function DetailUpdate() {
+  const { nickname } = useSelector((state) => {
+    return state.users.currentUser;
+  });
+
   const [post, setPost] = useState();
 
   const [title, setTitle] = useState('');
@@ -130,8 +135,7 @@ function DetailUpdate() {
             <ContentBox>
               <label>제목: </label>
               <input type="text" name="title" value={title} onChange={onChange} />
-              <label>작성자명:</label>
-              <input />
+              <label>작성자명:{nickname}</label>
             </ContentBox>
             <ContentBox>
               주제별:

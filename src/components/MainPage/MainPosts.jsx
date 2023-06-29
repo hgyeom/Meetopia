@@ -25,16 +25,54 @@ function List() {
   }, []);
 
   return (
-    <StyledMain>
-      <StyledMainNav>
-        <Location />
-        <button>dd</button>
-      </StyledMainNav>
-      <StyledMainposts>
-        {category !== '모두보기'
-          ? location !== '모두보기'
+    <>
+      <StyledMain>
+        <StyledMainNav>
+          <Location />
+          <button>dd</button>
+        </StyledMainNav>
+        <StyledMainposts>
+          {category !== '모두보기'
+            ? location !== '모두보기'
+              ? posts
+
+                  .filter((item) => item.category === category)
+                  .filter((item) => item.location === location)
+                  .map((post) => {
+                    return (
+                      <StyledMainPost key={post.postId}>
+                        <StyledPostTitle>{post.title}</StyledPostTitle>
+                        <div>
+                          <StyledPostContent>{post.content}</StyledPostContent>
+                          <hr />
+                          <StyledPostUser>{post.nickname}</StyledPostUser>
+                          <StyledPostInfo>
+                            {post.category} {post.location}
+                          </StyledPostInfo>
+                        </div>
+                      </StyledMainPost>
+                    );
+                  })
+              : posts
+
+                  .filter((item) => item.category === category)
+                  .map((post) => {
+                    return (
+                      <StyledMainPost key={post.postId}>
+                        <StyledPostTitle>{post.title}</StyledPostTitle>
+                        <div>
+                          <StyledPostContent>{post.content}</StyledPostContent>
+                          <hr />
+                          <StyledPostUser>{post.nickname}</StyledPostUser>
+                          <StyledPostInfo>
+                            {post.category} {post.location}
+                          </StyledPostInfo>
+                        </div>
+                      </StyledMainPost>
+                    );
+                  })
+            : location !== '모두보기'
             ? posts
-                .filter((item) => item.category === category)
                 .filter((item) => item.location === location)
                 .map((post) => {
                   return (
@@ -44,30 +82,14 @@ function List() {
                         <StyledPostContent>{post.content}</StyledPostContent>
                         <hr />
                         <StyledPostUser>{post.nickname}</StyledPostUser>
-                        <p>{post.category}</p>
+                        <StyledPostInfo>
+                          {post.category} {post.location}
+                        </StyledPostInfo>
                       </div>
                     </StyledMainPost>
                   );
                 })
-            : posts
-                .filter((item) => item.category === category)
-                .map((post) => {
-                  return (
-                    <StyledMainPost key={post.postId}>
-                      <StyledPostTitle>{post.title}</StyledPostTitle>
-                      <div>
-                        <StyledPostContent>{post.content}</StyledPostContent>
-                        <hr />
-                        <StyledPostUser>{post.nickname}</StyledPostUser>
-                        <p>{post.category}</p>
-                      </div>
-                    </StyledMainPost>
-                  );
-                })
-          : location !== '모두보기'
-          ? posts
-              .filter((item) => item.location === location)
-              .map((post) => {
+            : posts.map((post) => {
                 return (
                   <StyledMainPost key={post.postId}>
                     <StyledPostTitle>{post.title}</StyledPostTitle>
@@ -75,26 +97,16 @@ function List() {
                       <StyledPostContent>{post.content}</StyledPostContent>
                       <hr />
                       <StyledPostUser>{post.nickname}</StyledPostUser>
-                      <p>{post.category}</p>
+                      <StyledPostInfo>
+                        {post.category} {post.location}
+                      </StyledPostInfo>
                     </div>
                   </StyledMainPost>
                 );
-              })
-          : posts.map((post) => {
-              return (
-                <StyledMainPost key={post.postId}>
-                  <StyledPostTitle>{post.title}</StyledPostTitle>
-                  <div>
-                    <StyledPostContent>{post.content}</StyledPostContent>
-                    <hr />
-                    <StyledPostUser>{post.nickname}</StyledPostUser>
-                    <p>{post.category}</p>
-                  </div>
-                </StyledMainPost>
-              );
-            })}
-      </StyledMainposts>
-    </StyledMain>
+              })}
+        </StyledMainposts>
+      </StyledMain>
+    </>
   );
 }
 
@@ -125,19 +137,14 @@ const StyledMainPost = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   padding: 20px 25px 0;
   width: 19%;
+  min-width: 200px;
   height: 250px;
   background: #fff;
   border: 2px solid #d1d1d1;
   border-radius: 30px;
-
-  transition: 0.2s ease-in;
-  &.hover {
-    transform: scale(1.02);
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const StyledPostTitle = styled.div`
@@ -162,3 +169,7 @@ const StyledPostContent = styled.div`
 `;
 
 const StyledPostUser = styled.div``;
+const StyledPostInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
