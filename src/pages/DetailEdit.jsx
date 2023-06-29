@@ -1,12 +1,12 @@
 import React from 'react';
-import DetailEditPost from '../components/DetailEdit/DetailEditPost';
 import Header from '../components/Header';
+import DetailPost from '../components/DetailEdit/DetailPost';
 
 function DetailEdit() {
   return (
     <>
       <Header />
-      <DetailEditPost />
+      <DetailPost />
     </>
   );
 }

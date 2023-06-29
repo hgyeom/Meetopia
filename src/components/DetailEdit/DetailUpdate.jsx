@@ -1,11 +1,12 @@
-import { addDoc, collection, query, getDocs, doc } from 'firebase/firestore';
+import { collection, query, getDocs, doc, updateDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { styled } from 'styled-components';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import Header from '../Header';
 
-function DetailEditPost() {
-  const [posts, setPosts] = useState([]);
+function DetailUpdate() {
+  const [post, setPost] = useState();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -18,26 +19,38 @@ function DetailEditPost() {
 
   //postId 값 가져오기
   const postId = location.state?.postId;
+  // useEffect(() => {
+  //   console.log('postId=>', postId);
+  // }, []);
 
-  //fireStore 'posts' 데이터 읽어오기
+  //fireStore 'post' 데이터 읽어오기(postId랑 일치한 애만)
   useEffect(() => {
     const fetchData = async () => {
       const q = query(collection(db, 'posts'));
       const querySnapshot = await getDocs(q);
 
-      const initialPosts = [];
+      let initialPost;
       querySnapshot.forEach((doc) => {
-        initialPosts.push({ id: doc.id, ...doc.data() });
+        if (doc.id === postId) {
+          initialPost = { id: doc.id, ...doc.data() };
+        }
       });
-      setPosts(initialPosts);
+      setPost(initialPost);
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setTitle(post?.title);
+    setContent(post?.content);
+    setSelectTopic(post?.category);
+    setSelectLocation(post?.location);
+  }, [post]);
+
   // 주제별 select 박스
   const selectTopicList = [
     { value: '없음', name: '==선택==' },
-    { value: '공부', name: '공부' },
+    { value: '스터디', name: '공부' },
     { value: '스포츠', name: '스포츠' },
     { value: '음악', name: '음악' },
     { value: '영화', name: '영화' },
@@ -90,93 +103,84 @@ function DetailEditPost() {
     }
   };
 
-  //새로운 게시글 추가하기
-  const addPost = async (event) => {
-    event.preventDefault();
-    const today = new Date();
-    const newPost = {
-      title: title,
-      content: content,
-      category: selectTopic,
-      location: selectLocation,
-      days: today.toLocaleString()
-    };
+  //글 수정하기
+  const updatePost = async (e) => {
+    e.preventDefault();
+    const postRef = doc(db, 'posts', postId);
     if (!title || !content || selectTopic === '' || selectLocation === '') {
       alert('모든 내용을 입력해주세요.(제목, 내용, 카테고리)');
       return false;
     }
-    setPosts(() => {
-      return [...posts, newPost];
+    updateDoc(postRef, {
+      title: title,
+      content: content,
+      category: selectTopic,
+      location: selectLocation
     });
-    setTitle('');
-    setContent('');
-    setSelectTopic('');
-    setSelectLocation('');
-
-    const collectionRef = collection(db, 'posts');
-    const docRef = await addDoc(collectionRef, newPost);
-    const newDocId = docRef.id;
-    navigate(`/detail/${newDocId}`);
+    navigate(`/detail/${postId}`);
   };
 
-  //수정버튼 누르면 수정할 수 있는 page
-
   return (
-    <div style={{ margin: '30px' }}>
-      <MainTitle>모임 만들기 글 작성</MainTitle>
-      <br />
-      <content>
-        <form onSubmit={addPost}>
-          <ContentBox>
-            <label>제목: </label>
-            <input type="text" name="title" value={title} onChange={onChange} />
-            <label>작성자명:</label>
-            <input />
-          </ContentBox>
-          <ContentBox>
-            주제별:
-            <select name="category" value={selectTopic} onChange={handleSelectTopic}>
-              {selectTopicList.map((item) => {
-                return (
-                  <option value={item.value} key={item.value}>
-                    {item.name}
-                  </option>
-                );
-              })}
-            </select>
-            지역별:
-            <select name="location" value={selectLocation} onChange={handleSelectLocation}>
-              {selectLocationList.map((item) => {
-                return (
-                  <option value={item.value} key={item.value}>
-                    {item.name}
-                  </option>
-                );
-              })}
-            </select>
-          </ContentBox>
-          <ContentBox>
-            <label>모임을 소개해주세요!</label>
-            <div>
-              <textarea rows="30" cols="80" type="text" name="content" value={content} onChange={onChange}></textarea>
-            </div>
-            <button>작성 완료</button>
-            <Link to="/">
-              <button>취소</button>
-            </Link>
-          </ContentBox>
-        </form>
-      </content>
-    </div>
+    <>
+      <Header />
+      <div style={{ margin: '30px', maxWidth: '1300px' }}>
+        <MainTitle>[모임 만들기 글 수정]</MainTitle>
+        <content>
+          <form onSubmit={updatePost}>
+            <ContentBox>
+              <label>제목: </label>
+              <input type="text" name="title" value={title} onChange={onChange} />
+              <label>작성자명:</label>
+              <input />
+            </ContentBox>
+            <ContentBox>
+              주제별:
+              <select name="category" value={selectTopic} onChange={handleSelectTopic}>
+                {selectTopicList.map((item) => {
+                  return (
+                    <option value={item.value} key={item.value}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+              지역별:
+              <select name="location" value={selectLocation} onChange={handleSelectLocation}>
+                {selectLocationList.map((item) => {
+                  return (
+                    <option value={item.value} key={item.value}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </ContentBox>
+            <ContentBox>
+              <label>모임을 소개해주세요!</label>
+              <div>
+                <textarea rows="30" cols="80" type="text" name="content" value={content} onChange={onChange}></textarea>
+              </div>
+              <button>수정 완료</button>
+              <Link to="/">
+                <button>취소</button>
+              </Link>
+            </ContentBox>
+          </form>
+        </content>
+      </div>
+    </>
   );
 }
 
-export default DetailEditPost;
-
-//css
-
+export default DetailUpdate;
 const MainTitle = styled.h2`
   font-size: larger;
+  font-weight: 600;
+  margin: 10px;
+`;
+
+const SubTitle = styled.h2`
+  font-size: small;
   font-weight: 600;
   margin: 10px;
 `;

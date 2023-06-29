@@ -30,7 +30,7 @@ function DetailViewPost() {
 
   //수정 버튼 누르면 수정하는 페이지로
   const onEditButton = () => {
-    navigate(`/detail`, {
+    navigate(`/detail/update`, {
       state: {
         postId: id
       }
