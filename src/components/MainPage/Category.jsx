@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import { changeCategory, categorys } from '../../redux/modules/category';
@@ -11,6 +11,10 @@ function Category() {
     setIndex(id);
     dispatch(changeCategory(category));
   };
+
+  useEffect(() => {
+    dispatch(changeCategory('모두보기'));
+  }, []);
 
   return (
     <StyledCategorySection>
