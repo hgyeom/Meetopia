@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, deleteDoc, doc } from 'firebase/firestore';
 import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -6,7 +6,7 @@ import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 
 function DetailViewPost() {
-  const { nickname } = useSelector((state) => {
+  const { nickname, userid } = useSelector((state) => {
     return state.users.currentUser;
   });
   const [posts, setPosts] = useState([]);
