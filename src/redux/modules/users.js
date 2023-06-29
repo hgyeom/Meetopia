@@ -10,7 +10,6 @@ export const addCurrentUser = (payload) => {
   };
 };
 export const updateCurrentUser = (payload) => {
-  console.log('들어왔나?', payload);
   return {
     type: UPDATE_CURRENT_USER,
     payload
