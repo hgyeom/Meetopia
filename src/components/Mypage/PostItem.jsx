@@ -1,9 +1,10 @@
 import React from 'react';
 import * as S from './PostItem.styled';
+import uuid from 'react-uuid';
 
 const PostItem = ({ post }) => {
   return (
-    <S.StyledMainPost key={post.postId}>
+    <S.StyledMainPost>
       <S.StyledPostTitle>{post.title}</S.StyledPostTitle>
       <div>
         <S.StyledPostContent>{post.content}</S.StyledPostContent>

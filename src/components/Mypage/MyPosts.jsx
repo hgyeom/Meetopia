@@ -5,6 +5,7 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 // import Location from './Location';
 import PostItem from './PostItem';
+import uuid from 'react-uuid';
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -29,7 +30,7 @@ const MyPosts = () => {
   return (
     <PostsContainer>
       {posts.map((post) => {
-        return <PostItem post={post} />;
+        return <PostItem post={post} key={uuid()} />;
       })}
     </PostsContainer>
   );
