@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import { changeCategory, categorys } from '../../redux/modules/category';
+import Location from './Location';
 
 function Category() {
   const dispatch = useDispatch();
@@ -18,17 +19,22 @@ function Category() {
 
   return (
     <StyledCategorySection>
-      <StyledCategoryList>
-        {categorys.map((item) => (
-          <StyledCategory
-            key={item.id}
-            className={index === item.id ? 'active' : null}
-            onClick={() => setCategory(item.id, item.category)}
-          >
-            {item.category}
-          </StyledCategory>
-        ))}
-      </StyledCategoryList>
+      <StyledCategoryNav>
+        <StyledCategoryList>
+          {categorys.map((item) => (
+            <StyledCategory
+              key={item.id}
+              className={index === item.id ? 'active' : null}
+              onClick={() => setCategory(item.id, item.category)}
+            >
+              {item.category}
+            </StyledCategory>
+          ))}
+        </StyledCategoryList>
+        <StyledLocationNav>
+          지역 선택 : <Location />
+        </StyledLocationNav>
+      </StyledCategoryNav>
       <StlyedHr />
     </StyledCategorySection>
   );
@@ -42,6 +48,20 @@ export default Category;
 const StyledCategorySection = styled.section`
   max-width: 1300px;
   margin: 0 auto;
+`;
+
+const StyledCategoryNav = styled.div`
+  padding-top: 60px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledLocationNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 // category list
@@ -61,12 +81,12 @@ const StyledCategory = styled.li`
   // active 클래스만
   &.active {
     color: black;
-    border-bottom: 2px solid black;
+    border-bottom: 5px solid #ffcd4a;
   }
 `;
 
 // hr
 const StlyedHr = styled.hr`
-  border: 2px solid #d7b0ff;
+  border: 2px solid #dedede;
   border-radius: 6px;
 `;

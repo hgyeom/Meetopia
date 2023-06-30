@@ -12,7 +12,7 @@ function Comments({ postId, nickname, userid }) {
   const [isAdd, setIsAdd] = useState(false);
   const [comment, setComment] = useState([]);
 
-  // -------------------------------------useState관리-------------------------------------
+  // -------------------------------------useState관리---------------------------------------
 
   const fetchData = async () => {
     const q = query(collection(db, 'comment'), orderBy('days', 'desc'));
@@ -41,6 +41,12 @@ function Comments({ postId, nickname, userid }) {
   // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
+
+    if (!userid) {
+      alert('로그인 후 사용해주세요');
+      return;
+    }
+
     const newComment = { comment, nickname, postId, userid, days: new Date().toLocaleString() };
 
     const collectionRef = collection(db, 'comment');
@@ -67,7 +73,7 @@ function Comments({ postId, nickname, userid }) {
   return (
     <div>
       <div>
-        <h3>댓글</h3>
+        <MainLabel>댓글</MainLabel>
         <StF>
           <br />
           <input
@@ -83,19 +89,26 @@ function Comments({ postId, nickname, userid }) {
           </AddBtn>
         </StF>
       </div>
-      <div>
+      <div style={{}}>
         {comments.map((comment) => {
           return (
             <CommentBox key={comment?.commentsId}>
-              <p>닉네임 : {comment.nickname}</p>
-              <p>내용 : {comment.comment}</p>
+              <p>
+                <Label>닉네임 : </Label>
+                {comment.nickname}
+              </p>
+
+              <p>
+                <Label>내용 : </Label>
+                {comment.comment}
+              </p>
               {comment.userid === userid && (
                 <DeletedBtn
                   onClick={() => {
                     deleteComment(comment.id);
                   }}
                 >
-                  삭제
+                  댓글삭제
                 </DeletedBtn>
               )}
             </CommentBox>
@@ -115,20 +128,33 @@ const StF = styled.form`
 `;
 
 const AddBtn = styled.button`
-  border-radius: 10px;
-  color: white;
-  background-color: #141414;
-  font-size: 20px;
+  margin-left: 15px;
 `;
 
 const CommentBox = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #dedede;
   padding: 10px;
   margin: 10px;
 `;
 
 const DeletedBtn = styled.button`
-  background-color: white;
-  border: none;
+  /* background-color: white;
+  border: none; */
+  /* 지영님 이건 어떤가요 */
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
 `;
-// ----------------------------------styled-component---------------------------------------..
+
+const MainLabel = styled.label`
+  margin-left: 17px;
+  font-size: 22px;
+  font-weight: 600;
+`;
+
+const Label = styled.span`
+  font-weight: 600;
+`;
+
+// ----------------------------------styled-component---------------------------------------...

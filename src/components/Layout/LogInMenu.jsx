@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import * as S from './Header.styled.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signOut } from '@firebase/auth';
 
 const LogInMenu = () => {
+  const navigate = useNavigate();
+
   const { nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
@@ -13,6 +15,8 @@ const LogInMenu = () => {
   const logOut = async (event) => {
     event.preventDefault();
     await signOut(auth);
+
+    navigate('/');
   };
 
   return (

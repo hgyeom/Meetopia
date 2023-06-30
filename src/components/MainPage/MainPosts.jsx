@@ -35,11 +35,7 @@ function List() {
   }, [category, location]);
 
   return (
-    <StyledMain>
-      <StyledMainNav>
-        <div>지역</div>
-        <Location />
-      </StyledMainNav>
+    <div>
       <StyledMainposts>
         {posts.map((post) => {
           return (
@@ -53,34 +49,23 @@ function List() {
               <div>
                 <StyledPostContent>{post.content}</StyledPostContent>
                 <hr />
-                <StyledPostUser>{post.nickname}</StyledPostUser>
                 <StyledPostInfo>
-                  {post.category} {post.location}
+                  #{post.category} #{post.location}
                 </StyledPostInfo>
+                <StyledPostUserInfo>
+                  {post.nickname}
+                  <img src={post.profileImg} alt="프로필 사진" />
+                </StyledPostUserInfo>
               </div>
             </StyledMainPost>
           );
         })}
       </StyledMainposts>
-    </StyledMain>
+    </div>
   );
 }
 
 export default List;
-
-const StyledMain = styled.main``;
-
-const StyledMainNav = styled.div`
-  max-width: 1300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  gap: 10px;
-  margin: 0 auto;
-  border: 1px solid #d7b0ff;
-  height: 60px;
-`;
 
 const StyledMainposts = styled.div`
   max-width: 1300px;
@@ -93,7 +78,7 @@ const StyledMainposts = styled.div`
 `;
 
 const StyledMainPost = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   padding: 20px 25px 0;
@@ -101,14 +86,14 @@ const StyledMainPost = styled.div`
   min-width: 200px;
   height: 250px;
   background: #fff;
-  border: 2px solid #d1d1d1;
+  border: 2px solid #dedede;
   border-radius: 30px;
   cursor: pointer;
 `;
 
 const StyledPostTitle = styled.div`
   margin-top: 20px;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   height: 35px;
 `;
@@ -127,8 +112,19 @@ const StyledPostContent = styled.div`
   overflow: hidden;
 `;
 
-const StyledPostUser = styled.div``;
 const StyledPostInfo = styled.div`
   display: flex;
+  padding-top: 8px;
+  font-weight: 600;
+`;
+
+const StyledPostUserInfo = styled.div`
+  display: flex;
   justify-content: space-between;
+  height: 50px;
+  margin-top: 10px;
+  > img {
+    width: 40px;
+    margin-bottom: 10px;
+  }
 `;
