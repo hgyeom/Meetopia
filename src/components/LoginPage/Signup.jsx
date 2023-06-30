@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import LoginDiv from './loginCSS';
+import LoginDiv from './Loginpage.styled';
 import shortid from 'shortid';
 
 function Signup() {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { auth } from '../../firebase';
-import LoginDiv from './loginCSS';
+import LoginDiv from './Loginpage.styled';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 // import { signOut } from '@firebase/auth';
 
