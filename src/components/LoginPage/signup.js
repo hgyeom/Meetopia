@@ -45,25 +45,7 @@ function Signup() {
     }
   };
 
-  // const user = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (user?.userid) {
-  //     navigate('/');
-  //   }
-  // }, [user, navigate]);
-
-  // const SignupFunc = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { user: newUser } = await createUserWithEmailAndPassword(auth, Email, PW);
-  //     dispatch(addCurrentUser(newUser));
-  //   } catch (error) {
-  //     // Handle error
-  //     console.log(error);
-  //   }
-  // };
 
   const handleLogin = () => {
     navigate('/login');
