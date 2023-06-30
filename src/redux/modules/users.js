@@ -12,7 +12,6 @@ export const addCurrentUser = (currentUser, isLogin) => {
 };
 
 export const updateCurrentUser = (payload) => {
-  console.log('또안되네 개빡쳐 => ', payload);
   return {
     type: UPDATE_CURRENT_USER,
     payload
@@ -35,7 +34,6 @@ const initialState = {
 const users = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_CURRENT_USER:
-      console.log('왜또안들어와 미친넘아');
       return {
         ...state,
         currentUser: { ...state.currentUser, ...action.payload }

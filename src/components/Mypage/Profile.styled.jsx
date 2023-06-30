@@ -39,7 +39,7 @@ export const S = {
     > label {
       width: 20%;
       font-weight: 500;
-      color: #9da7ae;
+      color: ${(props) => props.theme.fontGray};
     }
     > div {
       display: flex;
