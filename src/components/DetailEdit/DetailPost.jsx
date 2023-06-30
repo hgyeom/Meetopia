@@ -109,7 +109,7 @@ function DetailPost() {
     navigate(`/detail/${newDocId}`);
   };
   return (
-    <div style={{ margin: '30px', maxWidth: '1300px' }}>
+    <PostLayout>
       <MainTitle>[모임 만들기 글 작성]</MainTitle>
       <br />
       <content>
@@ -140,19 +140,29 @@ function DetailPost() {
               })}
             </select>
           </ContentBox>
-          <ContentBox>
-            <label>모임을 소개해주세요!</label>
-            <div>
-              <textarea rows="30" cols="80" type="text" name="content" value={content} onChange={onChange}></textarea>
-            </div>
+          <ContentWriteLabel>모임을 소개해주세요!</ContentWriteLabel>
+          <ContentWriteBox>
+            <textarea
+              style={{
+                resize: 'none'
+              }}
+              rows="30"
+              cols="80"
+              type="text"
+              name="content"
+              value={content}
+              onChange={onChange}
+            ></textarea>
+          </ContentWriteBox>
+          <BtnBox>
             <button>작성 완료</button>
             <Link to="/">
               <button>취소</button>
             </Link>
-          </ContentBox>
+          </BtnBox>
         </form>
       </content>
-    </div>
+    </PostLayout>
   );
 }
 
@@ -167,7 +177,35 @@ const MainTitle = styled.h2`
 `;
 
 const ContentBox = styled.div`
-  border: 1px solid black;
+  border-bottom: 4px solid #ffcd4a;
   margin: 10px;
   padding: 10px;
+`;
+
+const PostLayout = styled.div`
+  margin-left: 385px;
+  margin-right: 385px;
+`;
+
+const ContentWriteBox = styled.div`
+  border-bottom: 4px solid #ffcd4a;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+`;
+
+const ContentWriteLabel = styled.p`
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  padding-top: 12px;
+`;
+
+const BtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+
+  /* margin-right: 240px; */
+  /* justify-content: center; */
 `;
