@@ -6,6 +6,7 @@ import { updateCurrentUser } from '../../redux/modules/users';
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { S } from './Profile.styled';
+import { ButtonSm, ButtonSmGray, Input } from '../Common.styled';
 
 const ProfileForm = () => {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const ProfileForm = () => {
       downloadURL = await getDownloadURL(imageRef);
 
       // 리덕스에 수정할 유저정보 전달
+      console.log('리덕스 프로필폼');
       dispatch(
         updateCurrentUser({
           nickname: reNickname,
@@ -85,19 +87,16 @@ const ProfileForm = () => {
       });
     }
 
-    navigate('/mypage');
+    // navigate('/mypage');
   };
 
   return (
     <>
       <form onSubmit={onSubmitHandler}>
         <S.ProfileBox>
-          {/* <div> */}
           <S.ImgBox>
             <img src={previewImg} alt="프로필 사진" />
           </S.ImgBox>
-          {/* <input type="file" onChange={handleFileSelect} />
-          </div> */}
           <S.RowBox>
             <S.Row>
               <label>이메일</label>
@@ -106,7 +105,13 @@ const ProfileForm = () => {
             <S.Row>
               <label>닉네임</label>
               <div>
-                <input type="text" defaultValue={nickname} name="nickname" onChange={onChange} />
+                <Input
+                  type="text"
+                  onChange={onChange}
+                  defaultValue={nickname}
+                  name="nickname"
+                  placeholder="닉네임을 입력해주세요"
+                />
               </div>
             </S.Row>
             <S.Row>
@@ -118,8 +123,8 @@ const ProfileForm = () => {
           </S.RowBox>
         </S.ProfileBox>
         <S.PageBtnBox>
-          <button onClick={onClickCancelButtonHandler}>취소</button>
-          <button>저장</button>
+          <ButtonSmGray onClick={onClickCancelButtonHandler}>취소</ButtonSmGray>
+          <ButtonSm>저장</ButtonSm>
         </S.PageBtnBox>
       </form>
     </>

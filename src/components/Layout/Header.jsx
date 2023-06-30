@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import '../../reset.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LogInMenu from './LogInMenu';
@@ -8,9 +7,6 @@ import LogoutMenu from './LogoutMenu';
 
 function Header() {
   const { isLogin } = useSelector((state) => {
-    return state.users;
-  });
-  const test = useSelector((state) => {
     return state.users;
   });
 

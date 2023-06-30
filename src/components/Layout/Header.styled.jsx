@@ -33,4 +33,5 @@ export const ProfileLink = styled(Link)`
   gap: 8px;
   color: inherit;
   font-size: 16px;
+  font-weight: 400;
 `;
