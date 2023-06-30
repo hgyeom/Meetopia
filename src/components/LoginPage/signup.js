@@ -72,7 +72,7 @@ function Signup() {
         
       ></input>
 
-      <button onClick={(e)=>Signup}> 회원가입</button>
+      <button onClick={(e)=>SignupFunc}> 회원가입</button>
         이미 회원이신가요? <button onClick={handleLogin}>로그인</button>
     </form>
     </LoginDiv>

@@ -9,6 +9,8 @@ export const addCurrentUser = (payload) => {
     payload
   };
 };
+
+
 export const updateCurrentUser = (payload) => {
   return {
     type: UPDATE_CURRENT_USER,
