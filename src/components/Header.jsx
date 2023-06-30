@@ -56,7 +56,15 @@ function Header() {
             새 글 쓰기
           </Link>
         </StyledHeaderNavButton>
-        <StyledHeaderNavButton>로그인</StyledHeaderNavButton>
+        <StyledHeaderNavButton>
+          <Link
+          to="/login"
+          style={{
+            textDecoration: 'none',
+            color: 'black'
+          }}>
+          로그인</Link>
+          </StyledHeaderNavButton>
       </StyledHeaderNav>
     </StyledHeader>
   );
