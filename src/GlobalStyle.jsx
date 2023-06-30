@@ -1,3 +1,9 @@
+const { createGlobalStyle } = require('styled-components');
+
+const GlobalStyle = createGlobalStyle`
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -127,3 +133,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+html, body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: ${(props) => props.theme.font};
+  font-weight: 400;
+}
+`;
+
+export default GlobalStyle;
