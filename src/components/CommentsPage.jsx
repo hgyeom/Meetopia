@@ -5,48 +5,43 @@ import { db } from '../firebase';
 import { styled } from 'styled-components';
 
 // -------------------------------------useState관리--------------------------------------
-function Comments({ postId, nickname }) {
+function Comments({ postId, nickname, userid }) {
   const comments = useSelector((state) => state.comments);
   const dispatch = useDispatch();
 
   const [isAdd, setIsAdd] = useState(false);
-
   const [comment, setComment] = useState([]);
 
   // -------------------------------------useState관리-------------------------------------
 
+  const fetchData = async () => {
+    const q = query(collection(db, 'comment'), orderBy('days', 'desc'));
+    const querySnapshot = await getDocs(q);
+
+    const initialComments = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = {
+        id: doc.id,
+        ...doc.data()
+      };
+      initialComments.push(data);
+    });
+
+    dispatch({
+      type: 'InitialState',
+      payload: { initialComments, postId }
+    });
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, 'comment'), orderBy('days', 'desc'));
-      const querySnapshot = await getDocs(q);
-
-      const initialComments = [];
-
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data()
-        };
-        initialComments.push(data);
-      });
-
-      dispatch({
-        type: 'InitialState',
-        payload: { initialComments, postId }
-      });
-    };
-
     fetchData();
   }, [isAdd]);
 
   // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
-    const newComment = { comment, nickname, postId, days: new Date().toLocaleString() };
-    setComment(() => {
-      return [...comments, newComment];
-    });
-    setComment('');
+    const newComment = { comment, nickname, postId, userid, days: new Date().toLocaleString() };
 
     const collectionRef = collection(db, 'comment');
     await addDoc(collectionRef, newComment);
@@ -94,13 +89,15 @@ function Comments({ postId, nickname }) {
             <CommentBox key={comment?.commentsId}>
               <p>닉네임 : {comment.nickname}</p>
               <p>내용 : {comment.comment}</p>
-              <DeletedBtn
-                onClick={() => {
-                  deleteComment(comment.id);
-                }}
-              >
-                삭제
-              </DeletedBtn>
+              {comment.userid === userid && (
+                <DeletedBtn
+                  onClick={() => {
+                    deleteComment(comment.id);
+                  }}
+                >
+                  삭제
+                </DeletedBtn>
+              )}
             </CommentBox>
           );
         })}
