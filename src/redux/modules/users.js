@@ -20,14 +20,6 @@ export const updateCurrentUser = (payload) => {
 
 // Initial State
 const initialState = {
-  users: [
-    {
-      userid: 'aaa@aaa.com',
-      nickname: '닉네임',
-      password: '12341234',
-      profileImg: '없'
-    }
-  ],
   currentUser: {
     userid: null,
     email: null,
@@ -44,7 +36,7 @@ const users = (state = initialState, action) => {
     case UPDATE_CURRENT_USER:
       return {
         ...state,
-        currentUser: { ...state.currentUser, ...action.currentUser }
+        currentUser: { ...state.currentUser, ...action.payload }
       };
     case ADD_CURRENT_USER:
       return {

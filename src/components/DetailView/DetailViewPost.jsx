@@ -38,7 +38,6 @@ function DetailViewPost() {
   }, []);
 
   const post = posts.find((item) => item.id === id);
-  console.log('posts', posts);
 
   //수정 버튼 누르면 수정하는 페이지로
   const onEditButton = () => {
@@ -52,11 +51,9 @@ function DetailViewPost() {
   // 👇👇👇👇👇👇
   const onDelButton = async () => {
     // DB에서 삭제
-    console.log(id);
     const todoRef = doc(db, 'posts', id);
     await deleteDoc(todoRef);
 
-    // navigate(-1);
     navigate('/');
   };
 

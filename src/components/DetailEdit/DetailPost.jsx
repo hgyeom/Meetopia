@@ -11,7 +11,6 @@ function DetailPost() {
     return state.users.currentUser;
   });
 
-  // console.log(nickname, userid);
   const [posts, setPosts] = useState([]);
 
   const [title, setTitle] = useState('');
@@ -58,7 +57,6 @@ function DetailPost() {
   //주제별 select 박스 값
   const handleSelectTopic = (event) => {
     setSelectTopic(event.target.value);
-    // console.log(selectTopic);
   };
   //지역별 select 박스 값
   const handleSelectLocation = (event) => {
@@ -92,7 +90,7 @@ function DetailPost() {
       nickname: nickname,
       days: today.toLocaleString()
     };
-    console.log('⭐⭐⭐⭐⭐', newPost);
+
     if (!title || !content || selectTopic === '' || selectLocation === '') {
       alert('모든 내용을 입력해주세요.(제목, 내용, 카테고리)');
       return false;

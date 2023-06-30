@@ -5,13 +5,17 @@ const bannerData = [
   {
     id: '1',
     alt: '1번',
-    img: 'https://c4.wallpaperflare.com/wallpaper/647/923/709/landscape-mountain-clouds-fantasy-art-wallpaper-preview.jpg'
+    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124239325681430619/Meetopia-001.png'
   },
-  { id: '2', alt: '2번', img: 'https://cdn.travie.com/news/photo/first/201705/img_19694_12.jpg' },
+  {
+    id: '2',
+    alt: '2번',
+    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124237008848564285/meetopia_banner_2.png'
+  },
   {
     id: '3',
     alt: '3번',
-    img: 'https://coresos-phinf.pstatic.net/a/319d7c/1_a3gUd018svc9hbv4wslnbha_3e62pt.jpg?type=e1920_std'
+    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124237008051646515/meetopia_banner_3.png'
   }
 ];
 
@@ -60,6 +64,6 @@ const StyledBannerItem = styled.div`
 
 const StyledImg = styled.img`
   width: 100%;
-  height: 250px;
+  height: 360px;
   object-fit: fill;
 `;

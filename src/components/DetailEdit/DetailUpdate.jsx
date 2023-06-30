@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { styled } from 'styled-components';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import Header from '../Layout/Header';
 import { useSelector } from 'react-redux';
 
 function DetailUpdate() {
@@ -24,9 +23,6 @@ function DetailUpdate() {
 
   //postId 값 가져오기
   const postId = location.state?.postId;
-  // useEffect(() => {
-  //   console.log('postId=>', postId);
-  // }, []);
 
   //fireStore 'post' 데이터 읽어오기(postId랑 일치한 애만)
   useEffect(() => {
@@ -88,7 +84,6 @@ function DetailUpdate() {
   //주제별 select 박스 값
   const handleSelectTopic = (event) => {
     setSelectTopic(event.target.value);
-    // console.log(selectTopic);
   };
   //지역별 select 박스 값
   const handleSelectLocation = (event) => {
@@ -127,7 +122,6 @@ function DetailUpdate() {
 
   return (
     <>
-      {/* <Header /> */}
       <div style={{ margin: '30px', maxWidth: '1300px' }}>
         <MainTitle>[모임 만들기 글 수정]</MainTitle>
         <content>
@@ -165,7 +159,7 @@ function DetailUpdate() {
                 <textarea rows="30" cols="80" type="text" name="content" value={content} onChange={onChange}></textarea>
               </div>
               <button>수정 완료</button>
-              <Link to="/">
+              <Link to={`/detail/${postId}`}>
                 <button>취소</button>
               </Link>
             </ContentBox>

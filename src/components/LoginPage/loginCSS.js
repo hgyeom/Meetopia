@@ -1,6 +1,4 @@
-
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 const LoginDiv = styled.div`
   width: 50%;
@@ -10,8 +8,7 @@ const LoginDiv = styled.div`
   form {
     width: 70%;
     padding: 20px;
-    box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.03),
-      0px 15px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.03), 0px 15px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     label {
@@ -32,12 +29,11 @@ const LoginDiv = styled.div`
       border-radius: 15px;
       padding: 5px 10px;
       background-color: orange;
-      color: black;
+      color: #ffcd4a;
       border: 1px solid black;
       margin-top: 10px;
-   
- 
-      } }
+    }
+  }
 `;
 
 export default LoginDiv;
