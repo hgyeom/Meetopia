@@ -1,7 +1,6 @@
 import { addDoc, collection, getDocs, query, deleteDoc, doc, orderBy } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import shortid from 'shortid';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
 import { updateDoc } from 'firebase/firestore';
@@ -68,7 +67,11 @@ function Comments({ postId, nickname }) {
     await addDoc(collectionRef, newComment);
     setIsAdd(!isAdd);
     // window.location.reload();
-    //방법을 모르겠어요.........
+    // 댓글을 삭제하였을 떄 Redux stor의 상태를 업데이트하는 동시에 콘솔에도 데이터가 삭제되길 원했는데
+    // 새로고침을 하지 않으면 state의 상태 변화만 일어나고 콘솔에는 작동되지 않는 오류가 있어
+    // 여러 방법들로 해결해보다 해결하지 못해 강제로 새로고침을 주었습니다
+
+    // - 30일 기준 해결방법을 찾아 해결 후 커밋
   };
 
   // ----------------------------------------데이터 추가하기----------------------------------
@@ -84,7 +87,6 @@ function Comments({ postId, nickname }) {
       type: 'DELETE_COMMENT',
       payload: commentId
     });
-    // console.log('id', testId);
   };
   // ----------------------------------------데이터 삭제하기----------------------------------
 
@@ -131,13 +133,6 @@ function Comments({ postId, nickname }) {
         //   });
         // }}
         >
-          {/* <input
-            name="닉네임"
-            value={nickname}
-            onChange={(event) => {
-              setNickname(event.target.value);
-            }}
-          /> */}
           <br />
           <input
             name="내용"
@@ -176,5 +171,3 @@ function Comments({ postId, nickname }) {
 }
 
 export default Comments;
-
-123123123123312321312312313213123;

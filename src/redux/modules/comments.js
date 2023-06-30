@@ -19,7 +19,6 @@ const initialState = [
 const comments = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_COMMENT':
-      // console.log(state, '1231');
       return [...state, action.payload];
     case 'DELETE_COMMENT':
       return state.filter((comment) => comment.id !== action.payload);
