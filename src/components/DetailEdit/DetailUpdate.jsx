@@ -127,7 +127,7 @@ function DetailUpdate() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div style={{ margin: '30px', maxWidth: '1300px' }}>
         <MainTitle>[모임 만들기 글 수정]</MainTitle>
         <content>
