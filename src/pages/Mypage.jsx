@@ -4,9 +4,15 @@ import { S } from '../components/Mypage/Mypage.styled';
 import Profile from '../components/Mypage/Profile';
 import MyPosts from '../components/Mypage/MyPosts';
 import { ButtonXs, SubTitle, Title } from '../components/Common.styled';
+import { useSelector } from 'react-redux';
 
 const Mypage = () => {
+  // Login Required
   const navigate = useNavigate();
+  const { isLogin } = useSelector((state) => {
+    return state.users;
+  });
+  if (!isLogin) navigate('/');
 
   const onClickEditButtonHandler = () => {
     navigate('/mypage/edit');

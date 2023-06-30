@@ -100,7 +100,8 @@ const commonButtonStyles = css`
   padding: 0 16px;
   border: 1px solid #d5d9de;
   border-radius: ${(props) => props.theme.borderRadius};
-  font-size: ${(props) => props.theme.fontSm};
+  font: inherit;
+  font-size: 0.9rem;
   line-height: 50px;
   background-color: #fff;
 `;
