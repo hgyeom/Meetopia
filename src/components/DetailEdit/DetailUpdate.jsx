@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { styled } from 'styled-components';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../Layout/Header';
 import { useSelector } from 'react-redux';
 
 function DetailUpdate() {

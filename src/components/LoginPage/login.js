@@ -6,7 +6,6 @@ import { auth } from '../../firebase';
 import LoginDiv from './loginCSS';
 import { addCurrentUser } from '../../redux/modules/users';
 import { signInWithEmailAndPassword } from '@firebase/auth';
-import { signOut } from '@firebase/auth';
 
 function Login() {
   const [Email, setEmail] = useState('');
@@ -38,7 +37,6 @@ function Login() {
         alert('비밀번호가 일치하지 않습니다.');
       } else {
         alert('로그인이 실패하였습니다.');
-       
       }
     }
   };
@@ -48,13 +46,6 @@ function Login() {
       navigate('/');
     }
   }, [user, navigate]);
-
-
-  const logOut = async (event) => {
-    event.preventDefault();
-    console.log('로그아웃 됨')
-    await signOut(auth);
-  };
 
   return (
     <LoginDiv>
@@ -86,7 +77,6 @@ function Login() {
         >
           회원가입
         </button>
-        <button onClick={logOut}>로그아웃</button>
       </form>
     </LoginDiv>
   );
