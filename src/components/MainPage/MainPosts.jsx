@@ -1,16 +1,16 @@
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { styled } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { collection, getDocs, query } from 'firebase/firestore';
-import { db } from '../../firebase';
-import Location from './Location';
-import { useNavigate } from 'react-router';
 import { filterdPosts, initialData } from '../../redux/modules/posts';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { styled } from 'styled-components';
+import Location from './Location';
+import { db } from '../../firebase';
 
 function List() {
   const navigate = useNavigate();
-  const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
+  const [allPosts, setAllPosts] = useState([]);
   const posts = useSelector((state) => state.posts);
   const category = useSelector((state) => state.category);
   const location = useSelector((state) => state.location);
@@ -18,7 +18,7 @@ function List() {
   // firebase 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'posts'));
+      const q = query(collection(db, 'posts'), orderBy('days', 'desc'));
       const querySnapshot = await getDocs(q);
       const initialPosts = [];
       querySnapshot.forEach((doc) => {
@@ -77,7 +77,6 @@ const StyledMainNav = styled.div`
   justify-content: center;
 
   gap: 10px;
-  /* align-items: center; */
   margin: 0 auto;
   border: 1px solid #d7b0ff;
   height: 60px;

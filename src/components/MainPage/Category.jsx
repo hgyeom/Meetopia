@@ -4,8 +4,8 @@ import { styled } from 'styled-components';
 import { changeCategory, categorys } from '../../redux/modules/category';
 
 function Category() {
-  const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
+  const [index, setIndex] = useState(0);
 
   const setCategory = (id, category) => {
     setIndex(id);
