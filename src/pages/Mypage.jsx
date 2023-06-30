@@ -4,12 +4,12 @@ import { S } from '../components/Mypage/Mypage.styled';
 import Profile from '../components/Mypage/Profile';
 import MyPosts from '../components/Mypage/MyPosts';
 
- import { useEffect } from 'react';
- import { auth } from '../firebase';
+import { useEffect } from 'react';
+import { auth } from '../firebase';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
- import { useDispatch, useSelector } from 'react-redux';
- import { addCurrentUser } from '../redux/modules/users';
- import { styled } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCurrentUser } from '../redux/modules/users';
+import { styled } from 'styled-components';
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Mypage = () => {
     const signIn = async (event) => {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, testEmail, testPassword);
-        // console.log('user with signIn', userCredential.user);
+        console.log('user with signIn', userCredential.user);
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
