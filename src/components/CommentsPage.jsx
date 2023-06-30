@@ -12,7 +12,7 @@ function Comments({ postId, nickname, userid }) {
   const [isAdd, setIsAdd] = useState(false);
   const [comment, setComment] = useState([]);
 
-  // -------------------------------------useState관리-------------------------------------
+  // -------------------------------------useState관리---------------------------------------
 
   const fetchData = async () => {
     const q = query(collection(db, 'comment'), orderBy('days', 'desc'));
@@ -137,4 +137,4 @@ const DeletedBtn = styled.button`
   background-color: white;
   border: none;
 `;
-// ----------------------------------styled-component---------------------------------------..
+// ----------------------------------styled-component---------------------------------------...
