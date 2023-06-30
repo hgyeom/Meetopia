@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeLocation } from '../../redux/modules/location';
 
 function Location() {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
   const location = useSelector((state) => state.location);
 
   const onSelectedOptionHandler = (item) => {
@@ -44,6 +44,8 @@ const StyledSelectSection = styled.section`
   border: 1px solid #ccc;
   width: 100px;
   height: 25px;
+  border-radius: 5px;
+  padding: 5px;
 `;
 
 const StyledSelectHeader = styled.div`

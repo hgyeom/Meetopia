@@ -1,22 +1,4 @@
-const initialState = [
-  // {
-  //   commentsId: '1234@1234',
-  //   nicknames: '랜덤 닉네임',
-  //   comments: '내용'
-  // },
-  // {
-  //   commentsId: '1234@1234',
-  //   nicknames: '랜덤 닉네임',
-  //   comments: '내용'
-  // },
-  // {
-  //   commentsId: '1234@1234',
-  //   nicknames: '랜덤 닉네임',
-  //   comments: '내용'
-  // }
-];
-
-const comments = (state = initialState, action) => {
+const comments = (state = [], action) => {
   switch (action.type) {
     case 'ADD_COMMENT':
       return [...state, action.payload];

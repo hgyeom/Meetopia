@@ -1,16 +1,16 @@
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { styled } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { collection, getDocs, query } from 'firebase/firestore';
-import { db } from '../../firebase';
-import Location from './Location';
-import { useNavigate } from 'react-router';
 import { filterdPosts, initialData } from '../../redux/modules/posts';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { styled } from 'styled-components';
+import Location from './Location';
+import { db } from '../../firebase';
 
 function List() {
   const navigate = useNavigate();
-  const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
+  const [allPosts, setAllPosts] = useState([]);
   const posts = useSelector((state) => state.posts);
   const category = useSelector((state) => state.category);
   const location = useSelector((state) => state.location);
@@ -18,7 +18,7 @@ function List() {
   // firebase 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'posts'));
+      const q = query(collection(db, 'posts'), orderBy('days', 'desc'));
       const querySnapshot = await getDocs(q);
       const initialPosts = [];
       querySnapshot.forEach((doc) => {
@@ -37,7 +37,7 @@ function List() {
   return (
     <StyledMain>
       <StyledMainNav>
-        <div>지역</div>
+        <Loctionlabel>지역</Loctionlabel>
         <Location />
       </StyledMainNav>
       <StyledMainposts>
@@ -55,7 +55,7 @@ function List() {
                 <hr />
                 <StyledPostUser>{post.nickname}</StyledPostUser>
                 <StyledPostInfo>
-                  {post.category} {post.location}
+                  #{post.category} #{post.location}
                 </StyledPostInfo>
               </div>
             </StyledMainPost>
@@ -77,10 +77,11 @@ const StyledMainNav = styled.div`
   justify-content: center;
 
   gap: 10px;
-  /* align-items: center; */
   margin: 0 auto;
-  border: 1px solid #d7b0ff;
+  border: 2px solid #ffcd4a;
+  border-radius: 5px;
   height: 60px;
+  padding: 13px;
 `;
 
 const StyledMainposts = styled.div`
@@ -94,7 +95,7 @@ const StyledMainposts = styled.div`
 `;
 
 const StyledMainPost = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   padding: 20px 25px 0;
@@ -102,14 +103,14 @@ const StyledMainPost = styled.div`
   min-width: 200px;
   height: 250px;
   background: #fff;
-  border: 2px solid #d1d1d1;
+  border: 2px solid #dedede;
   border-radius: 30px;
   cursor: pointer;
 `;
 
 const StyledPostTitle = styled.div`
   margin-top: 20px;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   height: 35px;
 `;
@@ -132,4 +133,11 @@ const StyledPostUser = styled.div``;
 const StyledPostInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 8px;
+  font-weight: 600;
+`;
+
+const Loctionlabel = styled.div`
+  font-weight: 600;
+  font-size: 1.4rem;
 `;

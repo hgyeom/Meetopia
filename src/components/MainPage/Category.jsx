@@ -4,8 +4,8 @@ import { styled } from 'styled-components';
 import { changeCategory, categorys } from '../../redux/modules/category';
 
 function Category() {
-  const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
+  const [index, setIndex] = useState(0);
 
   const setCategory = (id, category) => {
     setIndex(id);
@@ -46,6 +46,7 @@ const StyledCategorySection = styled.section`
 
 // category list
 const StyledCategoryList = styled.ul`
+  padding-top: 60px;
   display: flex;
 `;
 
@@ -61,12 +62,12 @@ const StyledCategory = styled.li`
   // active 클래스만
   &.active {
     color: black;
-    border-bottom: 2px solid black;
+    border-bottom: 5px solid #ffcd4a;
   }
 `;
 
 // hr
 const StlyedHr = styled.hr`
-  border: 2px solid #d7b0ff;
+  border: 2px solid #dedede;
   border-radius: 6px;
 `;

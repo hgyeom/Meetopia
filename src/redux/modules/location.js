@@ -32,7 +32,6 @@ const initialState = '모두보기';
 const location = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_LOCATION:
-      console.log(action.payload);
       return action.payload;
     default:
       return state;

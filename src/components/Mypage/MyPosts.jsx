@@ -3,14 +3,12 @@ import { styled } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
-// import Location from './Location';
 import PostItem from './PostItem';
 import shortid from 'shortid';
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
 
-  // firebase 데이터 가져오기
   const { userid } = useSelector((state) => state.users.currentUser);
 
   useEffect(() => {
