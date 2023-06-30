@@ -58,35 +58,42 @@ function DetailViewPost() {
   };
 
   return (
-    <div
-      style={{
-        margin: '30px'
-      }}
-    >
+    <PostLayout>
       <content>
         <div>
           <PostTitle>{post?.title}</PostTitle>
           <ContentBox>
-            {/* <label>작성자명:{nickname}</label> */}
-            <label>작성자명:{postNickname}</label>
-            {/* 작성자이름 받아오기 */}
-            <label>작성일:</label>
-            {post?.days}
-
-            {userid == postUserid ? <button onClick={onEditButton}>수정</button> : null}
-            {userid == postUserid ? <button onClick={onDelButton}>삭제</button> : null}
+            {/* p태그 공백 삭제 하지 말아주세요! */}
+            <p>
+              <Label>작성자명: </Label> {postNickname}
+            </p>
+            <br />
+            <p>
+              <Label>작성일: </Label>
+              {post?.days}
+            </p>
           </ContentBox>
         </div>
         <ContentBox>
-          주제별:{post?.category} 지역별:{post?.location}
+          <p>
+            <Label>주제별: </Label> {post?.category}
+          </p>
+          <br />
+          <p>
+            <Label>지역별: </Label> {post?.location}
+          </p>
         </ContentBox>
         <ContentBox>
-          <label>모임을 소개해주세요!</label>
+          <LabelContent>모임을 소개해주세요!</LabelContent>
           <ContentPostBox>{post?.content}</ContentPostBox>
+          <ButtonBox>
+            {userid == postUserid ? <button onClick={onEditButton}>수정</button> : null}
+            {userid == postUserid ? <button onClick={onDelButton}>삭제</button> : null}
+          </ButtonBox>
         </ContentBox>
       </content>
       <Comments postId={id} nickname={nickname} userid={userid} />
-    </div>
+    </PostLayout>
   );
 }
 
@@ -100,14 +107,36 @@ const PostTitle = styled.p`
 `;
 
 const ContentBox = styled.div`
-  border: 1px solid black;
+  border-bottom: 2px solid #dedede;
   margin: 10px;
   padding: 10px;
 `;
 
 const ContentPostBox = styled.div`
-  border: 1px solid black;
+  border-radius: 35px;
+  border: 6px solid #ffcd4a;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   height: 400px;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const LabelContent = styled.label`
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+`;
+
+const PostLayout = styled.div`
+  margin-left: 385px;
+  margin-right: 385px;
+`;
+
+const Label = styled.span`
+  font-weight: 600;
 `;
