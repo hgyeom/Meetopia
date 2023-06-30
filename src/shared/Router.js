@@ -9,7 +9,6 @@ import Comments from '../components/CommentsPage';
 import Detail from '../pages/Detail';
 import DetailEdit from '../pages/DetailEdit';
 import DetailUpdate from '../components/DetailEdit/DetailUpdate';
-import NotFound from '../pages/NotFound';
 
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -64,7 +63,6 @@ const Router = () => {
           <Route path="/detail" element={<DetailEdit />} />
           <Route path="/detail/update" element={<DetailUpdate />} />
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>
