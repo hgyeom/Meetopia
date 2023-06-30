@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
+import Comments from '../CommentsPage';
 
 function DetailViewPost() {
   const { nickname, userid } = useSelector((state) => {
@@ -87,6 +88,7 @@ function DetailViewPost() {
           <ContentPostBox>{post?.content}</ContentPostBox>
         </ContentBox>
       </content>
+      <Comments postId={id} nickname={nickname} />
     </div>
   );
 }

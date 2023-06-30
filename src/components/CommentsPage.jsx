@@ -6,37 +6,11 @@ import { db } from '../firebase';
 import { styled } from 'styled-components';
 import { updateDoc } from 'firebase/firestore';
 
-// ----------------------------------styled-component---------------------------
-const StF = styled.form`
-  display: flex;
-  justify-content: center;
-`;
-
-const AddBtn = styled.button`
-  border-radius: 10px;
-  color: white;
-  background-color: #141414;
-  font-size: 20px;
-`;
-
-const CommentBox = styled.div`
-  border-bottom: 1px solid black;
-  padding: 10px;
-  margin: 10px;
-`;
-
-const DeletedBtn = styled.button`
-  background-color: white;
-  border: none;
-`;
-// ----------------------------------styled-component------------------------------
-
-// -------------------------------------useState관리--------------------------------
-function Comments() {
+// -------------------------------------useState관리--------------------------------------
+function Comments({ postId, nickname }) {
   // const post = pots.filter((post) => post.id === id)[0];
 
   const comments = useSelector((state) => state.comments);
-  console.log(comments, '핫');
   const dispatch = useDispatch();
 
   const [isAdd, setIsAdd] = useState(false);
@@ -65,19 +39,16 @@ function Comments() {
 
       dispatch({
         type: 'InitialState',
-        payload: initialComments
+        payload: { initialComments, postId }
       });
     };
 
     fetchData();
-    // console.log(new Date());
   }, [isAdd]);
 
   // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
-    const nickname = 's닉네임';
-    const postId = '1';
     const newComment = { comment, nickname, postId, timeStamp: new Date() };
     setComment(() => {
       return [...comments, newComment];
@@ -103,23 +74,44 @@ function Comments() {
   // ----------------------------------------데이터 추가하기----------------------------------
 
   // ----------------------------------------데이터 삭제하기----------------------------------
-  const deleteComment = async (event, test) => {
-    console.log('event', event);
-    console.log('test', test);
-    console.log(event.target.dataset.docid);
-    let reviewDocId = event.target.dataset.docid;
+  const deleteComment = async (commentId) => {
     const collectionRef = collection(db, 'comment');
-    const commentRef = doc(collectionRef, reviewDocId);
+    const commentRef = doc(collectionRef, commentId);
 
     await deleteDoc(commentRef);
 
     dispatch({
       type: 'DELETE_COMMENT',
-      payload: reviewDocId
+      payload: commentId
     });
     // console.log('id', testId);
   };
   // ----------------------------------------데이터 삭제하기----------------------------------
+
+  // ----------------------------------styled-component-----------------------------------
+  const StF = styled.form`
+    display: flex;
+    justify-content: center;
+  `;
+
+  const AddBtn = styled.button`
+    border-radius: 10px;
+    color: white;
+    background-color: #141414;
+    font-size: 20px;
+  `;
+
+  const CommentBox = styled.div`
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+  `;
+
+  const DeletedBtn = styled.button`
+    background-color: white;
+    border: none;
+  `;
+  // ----------------------------------styled-component---------------------------------------..
   console.log('comments', comments);
   return (
     <div>
@@ -169,9 +161,8 @@ function Comments() {
               <p>닉네임 : {comment.nickname}</p>
               <p>내용 : {comment.comment}</p>
               <DeletedBtn
-                data-docId={comment.id}
-                onClick={(event) => {
-                  deleteComment(event, comment.id);
+                onClick={() => {
+                  deleteComment(comment.id);
                 }}
               >
                 삭제
@@ -185,3 +176,5 @@ function Comments() {
 }
 
 export default Comments;
+
+123123123123312321312312313213123;
