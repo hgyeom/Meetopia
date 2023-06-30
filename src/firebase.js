@@ -18,17 +18,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: 'G-EKF5PLVJXE'
 };
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBUKuP2-LpqfAIVExuDQiVIjZ3WUqU71XA",
-//   authDomain: "meetopia-5eb69.firebaseapp.com",
-//   projectId: "meetopia-5eb69",
-//   storageBucket: "meetopia-5eb69.appspot.com",
-//   messagingSenderId: "53770758276",
-//   appId: "1:53770758276:web:4bbd277fe9d96888273ad1",
-//   measurementId: "G-EKF5PLVJXE"
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
