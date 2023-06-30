@@ -44,6 +44,8 @@ const StyledSelectSection = styled.section`
   border: 1px solid #ccc;
   width: 100px;
   height: 25px;
+  border-radius: 5px;
+  padding: 5px;
 `;
 
 const StyledSelectHeader = styled.div`

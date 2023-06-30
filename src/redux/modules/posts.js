@@ -1,5 +1,3 @@
-// import { collection, getDocs, query } from 'firebase/firestore';
-// import { db } from '../../firebase';
 const INITIAL_DATA = 'INITIAL_DATA';
 const FILTERD_POSTS = 'FILTERD_POSTS';
 
@@ -17,9 +15,7 @@ export const filterdPosts = (payload) => {
   };
 };
 
-const initialState = [];
-
-const contents = (state = initialState, action) => {
+const contents = (state = [], action) => {
   switch (action.type) {
     case INITIAL_DATA:
       return action.payload;

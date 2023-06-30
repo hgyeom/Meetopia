@@ -4,7 +4,6 @@ export const StyledMainPost = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0 0 23%;
-  /* justify-content: center; */
   margin-top: 10px;
   padding: 20px 25px 0;
   width: 19%;
