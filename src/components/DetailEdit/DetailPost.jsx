@@ -7,7 +7,7 @@ import shortid from 'shortid';
 import { useSelector } from 'react-redux';
 
 function DetailPost() {
-  const { nickname, userid } = useSelector((state) => {
+  const { nickname, userid, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
 
@@ -82,12 +82,13 @@ function DetailPost() {
     const today = new Date();
     const newPost = {
       postId: shortid.generate(),
-      title: title,
-      content: content,
+      title,
+      content,
       category: selectTopic,
       location: selectLocation,
-      userid: userid,
-      nickname: nickname,
+      userid,
+      nickname,
+      profileImg,
       days: today.toLocaleString()
     };
 

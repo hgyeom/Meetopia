@@ -18,34 +18,31 @@ function Signup() {
   const signupFunc = async (event) => {
     event.preventDefault();
 
-   
-    if (PW!==PWConfirm) return alert('비밀번호 확인이 일치하지 않습니다!') 
-    if (PW.length<6) return alert('비밀번호 6자리 이상 입력 해주세요!')
+    if (PW !== PWConfirm) return alert('비밀번호 확인이 일치하지 않습니다!');
+    if (PW.length < 6) return alert('비밀번호 6자리 이상 입력 해주세요!');
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, Email, PW);
 
-      
-      let nickname = shortid.generate()
-      const PRROFILE_IMG = "https://firebasestorage.googleapis.com/v0/b/meetopia-5eb69.appspot.com/o/profile.png?alt=media&token=99a0a3e3-6ebf-4eba-a600-f1fce3405617 "
+      let nickname = shortid.generate();
+      const PRROFILE_IMG =
+        'https://firebasestorage.googleapis.com/v0/b/meetopia-5eb69.appspot.com/o/profile.png?alt=media&token=99a0a3e3-6ebf-4eba-a600-f1fce3405617 ';
       await updateProfile(auth.currentUser, {
-        displayName: nickname, photoURL: PRROFILE_IMG
-      })
-      
+        displayName: nickname,
+        photoURL: PRROFILE_IMG
+      });
 
       // Signed in
       const user = userCredential.user;
       console.log('user with signUp', user);
 
-      alert ('회원가입 완료!')
-       navigate('/');
+      alert('회원가입 완료!');
+      navigate('/');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('error with signUp', errorCode, errorMessage);
     }
   };
-
-
 
   const handleLogin = () => {
     navigate('/login');
