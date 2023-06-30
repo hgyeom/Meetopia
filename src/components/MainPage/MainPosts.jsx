@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 import Location from './Location';
+import { useNavigate } from 'react-router';
+import { filterdPosts, initialData } from '../../redux/modules/posts';
 
 function List() {
-  const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
+  const [allPosts, setAllPosts] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
   const category = useSelector((state) => state.category);
   const location = useSelector((state) => state.location);
 
@@ -19,94 +24,45 @@ function List() {
       querySnapshot.forEach((doc) => {
         initialPosts.push({ id: doc.id, ...doc.data() });
       });
-      setPosts(initialPosts);
+      setAllPosts(initialPosts);
+      dispatch(initialData(initialPosts));
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    dispatch(filterdPosts({ category, allPosts, location }));
+  }, [category, location]);
+
   return (
-    <>
-      <StyledMain>
-        <StyledMainNav>
-          <Location />
-          <button>dd</button>
-        </StyledMainNav>
-        <StyledMainposts>
-          {category !== '모두보기'
-            ? location !== '모두보기'
-              ? posts
-
-                  .filter((item) => item.category === category)
-                  .filter((item) => item.location === location)
-                  .map((post) => {
-                    return (
-                      <StyledMainPost key={post.postId}>
-                        <StyledPostTitle>{post.title}</StyledPostTitle>
-                        <div>
-                          <StyledPostContent>{post.content}</StyledPostContent>
-                          <hr />
-                          <StyledPostUser>{post.nickname}</StyledPostUser>
-                          <StyledPostInfo>
-                            {post.category} {post.location}
-                          </StyledPostInfo>
-                        </div>
-                      </StyledMainPost>
-                    );
-                  })
-              : posts
-
-                  .filter((item) => item.category === category)
-                  .map((post) => {
-                    return (
-                      <StyledMainPost key={post.postId}>
-                        <StyledPostTitle>{post.title}</StyledPostTitle>
-                        <div>
-                          <StyledPostContent>{post.content}</StyledPostContent>
-                          <hr />
-                          <StyledPostUser>{post.nickname}</StyledPostUser>
-                          <StyledPostInfo>
-                            {post.category} {post.location}
-                          </StyledPostInfo>
-                        </div>
-                      </StyledMainPost>
-                    );
-                  })
-            : location !== '모두보기'
-            ? posts
-                .filter((item) => item.location === location)
-                .map((post) => {
-                  return (
-                    <StyledMainPost key={post.postId}>
-                      <StyledPostTitle>{post.title}</StyledPostTitle>
-                      <div>
-                        <StyledPostContent>{post.content}</StyledPostContent>
-                        <hr />
-                        <StyledPostUser>{post.nickname}</StyledPostUser>
-                        <StyledPostInfo>
-                          {post.category} {post.location}
-                        </StyledPostInfo>
-                      </div>
-                    </StyledMainPost>
-                  );
-                })
-            : posts.map((post) => {
-                return (
-                  <StyledMainPost key={post.postId}>
-                    <StyledPostTitle>{post.title}</StyledPostTitle>
-                    <div>
-                      <StyledPostContent>{post.content}</StyledPostContent>
-                      <hr />
-                      <StyledPostUser>{post.nickname}</StyledPostUser>
-                      <StyledPostInfo>
-                        {post.category} {post.location}
-                      </StyledPostInfo>
-                    </div>
-                  </StyledMainPost>
-                );
-              })}
-        </StyledMainposts>
-      </StyledMain>
-    </>
+    <StyledMain>
+      <StyledMainNav>
+        <div>지역</div>
+        <Location />
+      </StyledMainNav>
+      <StyledMainposts>
+        {posts.map((post) => {
+          return (
+            <StyledMainPost
+              key={post.postId}
+              onClick={() => {
+                navigate('/detail/' + post.id);
+              }}
+            >
+              <StyledPostTitle>{post.title}</StyledPostTitle>
+              <div>
+                <StyledPostContent>{post.content}</StyledPostContent>
+                <hr />
+                <StyledPostUser>{post.nickname}</StyledPostUser>
+                <StyledPostInfo>
+                  {post.category} {post.location}
+                </StyledPostInfo>
+              </div>
+            </StyledMainPost>
+          );
+        })}
+      </StyledMainposts>
+    </StyledMain>
   );
 }
 
@@ -117,10 +73,14 @@ const StyledMain = styled.main``;
 const StyledMainNav = styled.div`
   max-width: 1300px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 10px;
+  /* align-items: center; */
   margin: 0 auto;
   border: 1px solid #d7b0ff;
-  height: 80px;
+  height: 60px;
 `;
 
 const StyledMainposts = styled.div`

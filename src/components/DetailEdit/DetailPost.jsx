@@ -92,6 +92,7 @@ function DetailPost() {
       nickname: nickname,
       days: today.toLocaleString()
     };
+    console.log('⭐⭐⭐⭐⭐', newPost);
     if (!title || !content || selectTopic === '' || selectLocation === '') {
       alert('모든 내용을 입력해주세요.(제목, 내용, 카테고리)');
       return false;

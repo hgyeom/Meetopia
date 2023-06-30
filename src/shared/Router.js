@@ -15,6 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCurrentUser } from '../redux/modules/users';
+import Layout from '../components/Layout';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Router = () => {
 
   return (
     <BrowserRouter>
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/users/:id" element={<Mypage />} /> */}
@@ -52,6 +54,7 @@ const Router = () => {
         <Route path="/detail/update" element={<DetailUpdate />} />
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
+    </Layout>
     </BrowserRouter>
   );
 };
