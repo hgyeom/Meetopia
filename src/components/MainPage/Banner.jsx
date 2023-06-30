@@ -15,27 +15,6 @@ const bannerData = [
   }
 ];
 
-const StyledBannerContainer = styled.div`
-  overflow: hidden;
-`;
-
-const StyledBannerItems = styled.div`
-  width: ${(props) => props.totalitems * 100}vw;
-  display: flex;
-  transition: transform 0.5s ease;
-  transform: translateX(-${(props) => props.currentindex * 100}vw);
-`;
-
-const StyledBannerItem = styled.div`
-  width: 100vw;
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  height: 250px;
-  object-fit: fill;
-`;
-
 function Banner() {
   const myRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -63,3 +42,24 @@ function Banner() {
 }
 
 export default Banner;
+
+const StyledBannerContainer = styled.div`
+  overflow: hidden;
+`;
+
+const StyledBannerItems = styled.div`
+  width: ${(props) => props.totalitems * 100}vw;
+  display: flex;
+  transition: transform 0.5s ease;
+  transform: translateX(-${(props) => props.currentindex * 100}vw);
+`;
+
+const StyledBannerItem = styled.div`
+  width: 100vw;
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 250px;
+  object-fit: fill;
+`;
