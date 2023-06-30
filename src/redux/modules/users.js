@@ -21,14 +21,6 @@ export const updateCurrentUser = (payload) => {
 
 // Initial State
 const initialState = {
-  users: [
-    {
-      userid: 'aaa@aaa.com',
-      nickname: '닉네임',
-      password: '12341234',
-      profileImg: '없'
-    }
-  ],
   currentUser: {
     userid: null,
     email: null,

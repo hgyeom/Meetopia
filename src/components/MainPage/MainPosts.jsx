@@ -37,7 +37,7 @@ function List() {
   return (
     <StyledMain>
       <StyledMainNav>
-        <div>지역</div>
+        <Loctionlabel>지역</Loctionlabel>
         <Location />
       </StyledMainNav>
       <StyledMainposts>
@@ -55,7 +55,7 @@ function List() {
                 <hr />
                 <StyledPostUser>{post.nickname}</StyledPostUser>
                 <StyledPostInfo>
-                  {post.category} {post.location}
+                  #{post.category} #{post.location}
                 </StyledPostInfo>
               </div>
             </StyledMainPost>
@@ -78,8 +78,10 @@ const StyledMainNav = styled.div`
 
   gap: 10px;
   margin: 0 auto;
-  border: 1px solid #d7b0ff;
+  border: 2px solid #ffcd4a;
+  border-radius: 5px;
   height: 60px;
+  padding: 13px;
 `;
 
 const StyledMainposts = styled.div`
@@ -93,7 +95,7 @@ const StyledMainposts = styled.div`
 `;
 
 const StyledMainPost = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   padding: 20px 25px 0;
@@ -101,14 +103,14 @@ const StyledMainPost = styled.div`
   min-width: 200px;
   height: 250px;
   background: #fff;
-  border: 2px solid #d1d1d1;
+  border: 2px solid #dedede;
   border-radius: 30px;
   cursor: pointer;
 `;
 
 const StyledPostTitle = styled.div`
   margin-top: 20px;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   height: 35px;
 `;
@@ -131,4 +133,11 @@ const StyledPostUser = styled.div``;
 const StyledPostInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 8px;
+  font-weight: 600;
+`;
+
+const Loctionlabel = styled.div`
+  font-weight: 600;
+  font-size: 1.4rem;
 `;

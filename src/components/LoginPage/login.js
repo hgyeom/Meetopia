@@ -10,11 +10,9 @@ import { signInWithEmailAndPassword } from '@firebase/auth';
 function Login() {
   const [Email, setEmail] = useState('');
   const [PW, setPW] = useState('');
-  const [ErrorMsg, setErrorMsg] = useState('');
 
   const user = useSelector((state) => state.user);
   let navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const signInFunc = async (e) => {
     e.preventDefault();
@@ -26,8 +24,6 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, Email, PW);
       console.log('user with signIn', userCredential.user);
 
-      // await auth.signInWithEmailAndPassword(Email, PW);
-      // dispatch(addCurrentUser({ email: Email }));
       navigate('/');
     } catch (error) {
       console.log(error.code);
@@ -66,7 +62,6 @@ function Login() {
           name="password"
           onChange={(e) => setPW(e.currentTarget.value)}
         ></input>
-        {ErrorMsg != '' || <p>{ErrorMsg}</p>}
         <button onClick={signInFunc}>로그인</button>
         가입을 안하셨나요?
         <button

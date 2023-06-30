@@ -11,14 +11,6 @@ const ProfileForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // 테스트 코드
-  console.log('프로필입력p / 현재 로그인한 유저의 정보 확인 : ', auth.currentUser);
-  const test = useSelector((state) => {
-    return state.users;
-  });
-  console.log('프로필입력p / 리덕스 users정보 확인 : ', test);
-
-  // 변수
   const { email, nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
@@ -28,7 +20,6 @@ const ProfileForm = () => {
     setPreviewImg(profileImg);
   }, [profileImg]);
 
-  // 메서드
   const onChange = ({ target }) => {
     setReNickname(target.value);
   };
@@ -44,8 +35,7 @@ const ProfileForm = () => {
     theFile = event.target.files[0];
 
     setSelectedFile(theFile);
-    console.log('❤️theFile', theFile);
-    // theFile이 falsy할때 통과
+
     if (theFile) {
       // 프로필이미지 미리보기
       const reader = new FileReader();
@@ -57,14 +47,12 @@ const ProfileForm = () => {
       };
       reader.readAsDataURL(theFile);
     }
-    console.log('❤️❤️theFile2', theFile);
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     let downloadURL;
-    console.log('❤️❤️❤️❤️downloadURL', downloadURL);
 
     if (!selectedFile) {
       // 리덕스에 수정할 유저정보 전달
@@ -73,13 +61,11 @@ const ProfileForm = () => {
           nickname: reNickname
         })
       );
-
       // 파이어베이스에 수정할 유저정보 전달
       await updateProfile(auth.currentUser, {
         displayName: reNickname
       });
     } else {
-      console.log('theFile 통과', theFile);
       // 파이어스토어에 이미지 전달
       const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
       await uploadBytes(imageRef, selectedFile);
@@ -93,7 +79,6 @@ const ProfileForm = () => {
           profileImg: downloadURL
         })
       );
-
       // 파이어베이스에 수정할 유저정보 전달
       await updateProfile(auth.currentUser, {
         displayName: reNickname,
