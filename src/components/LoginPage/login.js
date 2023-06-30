@@ -6,6 +6,7 @@ import { auth } from '../../firebase';
 import LoginDiv from './loginCSS';
 import { addCurrentUser } from '../../redux/modules/users';
 import { signInWithEmailAndPassword } from '@firebase/auth';
+import { signOut } from '@firebase/auth';
 
 function Login() {
   const [Email, setEmail] = useState('');
@@ -32,14 +33,12 @@ function Login() {
     } catch (error) {
       console.log(error.code);
       if (error.code === 'auth/user-not-found') {
-        // feat:: 사용자한테 보여지게 수정
-        setErrorMsg('존재하지 않는 이메일입니다.');
+        alert('존재하지 않는 이메일입니다.');
       } else if (error.code === 'auth/wrong-password') {
-        // feat:: 사용자한테 보여지게 수정
-        setErrorMsg('비밀번호가 일치하지 않습니다.');
+        alert('비밀번호가 일치하지 않습니다.');
       } else {
-        // feat:: 사용자한테 보여지게 수정
-        setErrorMsg('로그인이 실패하였습니다.');
+        alert('로그인이 실패하였습니다.');
+       
       }
     }
   };
@@ -50,15 +49,12 @@ function Login() {
     }
   }, [user, navigate]);
 
-  useEffect(() => {
-    const errorTimeout = setTimeout(() => {
-      setErrorMsg('');
-    }, 5000);
 
-    return () => clearTimeout(errorTimeout);
-  }, [ErrorMsg]);
-
-  // feat:: 여기다 임시 로그아웃 기능 만들어놓기. 나중에 헤더로 옮길 예정
+  const logOut = async (event) => {
+    event.preventDefault();
+    console.log('로그아웃 됨')
+    await signOut(auth);
+  };
 
   return (
     <LoginDiv>
@@ -90,6 +86,7 @@ function Login() {
         >
           회원가입
         </button>
+        <button onClick={logOut}>로그아웃</button>
       </form>
     </LoginDiv>
   );

@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../firebase';
 import { addCurrentUser } from '../../redux/modules/users';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import LoginDiv from './loginCSS';
+import shortid from 'shortid';
 
 function Signup() {
   const navigate = useNavigate();
@@ -17,20 +18,26 @@ function Signup() {
   const signupFunc = async (event) => {
     event.preventDefault();
 
-    // feat:: 비밀번호 확인 체크 코드 필요
-
+   
+    if (PW!==PWConfirm) return alert('비밀번호 확인이 일치하지 않습니다!') 
+    if (PW.length<6) return alert('비밀번호 6자리 이상 입력 해주세요!')
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, Email, PW);
 
-      // feat:: 닉네임(shortid), 기본프로필 이미지 url 넣어주는 셋팅
-      // 그럴려면 기본 프로필 이미지를 구해다가 파이어스토리지에 넣어두고 url 값 가져와야 함
+      
+      let nickname = shortid.generate()
+      const PRROFILE_IMG = "https://firebasestorage.googleapis.com/v0/b/meetopia-5eb69.appspot.com/o/profile.png?alt=media&token=99a0a3e3-6ebf-4eba-a600-f1fce3405617 "
+      await updateProfile(auth.currentUser, {
+        displayName: nickname, photoURL: PRROFILE_IMG
+      })
+      
 
       // Signed in
       const user = userCredential.user;
       console.log('user with signUp', user);
 
-      // feat:: 회원가입 완료 얼럿창 추가
-      // navigate('/');
+      alert ('회원가입 완료!')
+       navigate('/');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
