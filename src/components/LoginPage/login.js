@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../firebase';
 import LoginDiv from './loginCSS';
-import { addCurrentUser } from '../../redux/modules/users';
 import { signInWithEmailAndPassword } from '@firebase/auth';
+// import { signOut } from '@firebase/auth';
 
 function Login() {
   const [Email, setEmail] = useState('');
   const [PW, setPW] = useState('');
-  const [ErrorMsg, setErrorMsg] = useState('');
+  // const [ErrorMsg, setErrorMsg] = useState('');
 
   const user = useSelector((state) => state.user);
   let navigate = useNavigate();
@@ -26,8 +26,7 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, Email, PW);
       console.log('user with signIn', userCredential.user);
 
-      // await auth.signInWithEmailAndPassword(Email, PW);
-      // dispatch(addCurrentUser({ email: Email }));
+      
       navigate('/');
     } catch (error) {
       console.log(error.code);
@@ -37,6 +36,7 @@ function Login() {
         alert('비밀번호가 일치하지 않습니다.');
       } else {
         alert('로그인이 실패하였습니다.');
+       
       }
     }
   };
@@ -47,28 +47,37 @@ function Login() {
     }
   }, [user, navigate]);
 
+
+  // const logOut = async (event) => {
+  //   event.preventDefault();
+  //   console.log('로그아웃 됨')
+  //   await signOut(auth);
+  // };
+
   return (
     <LoginDiv>
       <form>
-        <label>이메일</label>
+        <span>Login</span>
+        <label></label>
         <input
           type="email"
-          placeholder="이메일 입력해주세요"
+          placeholder="이메일 입력해주세요."
           value={Email}
           name="email"
           onChange={(e) => setEmail(e.currentTarget.value)}
         ></input>
-        <label>비밀번호</label>
+        <br></br>
         <input
           type="password"
-          placeholder="비밀번호를 입력해주세요"
+          placeholder="비밀번호를 입력해주세요."
           value={PW}
           name="password"
           onChange={(e) => setPW(e.currentTarget.value)}
         ></input>
-        {ErrorMsg != '' || <p>{ErrorMsg}</p>}
+        <br></br>
         <button onClick={signInFunc}>로그인</button>
-        가입을 안하셨나요?
+        <br></br>
+        <p>가입을 안하셨나요?🤔</p>
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -77,8 +86,10 @@ function Login() {
         >
           회원가입
         </button>
-      </form>
+        {/* <button onClick={logOut}>로그아웃</button> */}
+        </form>
     </LoginDiv>
+ 
   );
 }
 
