@@ -12,7 +12,7 @@ function Comments({ postId, nickname, userid }) {
   const [isAdd, setIsAdd] = useState(false);
   const [comment, setComment] = useState([]);
 
-  // -------------------------------------useState관리-------------------------------------
+  // -------------------------------------useState관리---------------------------------------
 
   const fetchData = async () => {
     const q = query(collection(db, 'comment'), orderBy('days', 'desc'));
@@ -41,17 +41,17 @@ function Comments({ postId, nickname, userid }) {
   // ----------------------------------------데이터 추가하기----------------------------------
   const addComment = async (event) => {
     event.preventDefault();
+
+    if (!userid) {
+      alert('로그인 후 사용해주세요');
+      return;
+    }
+
     const newComment = { comment, nickname, postId, userid, days: new Date().toLocaleString() };
 
     const collectionRef = collection(db, 'comment');
     await addDoc(collectionRef, newComment);
     setIsAdd(!isAdd);
-    // window.location.reload();
-    // 댓글을 삭제하였을 떄 Redux stor의 상태를 업데이트하는 동시에 콘솔에도 데이터가 삭제되길 원했는데
-    // 새로고침을 하지 않으면 state의 상태 변화만 일어나고 콘솔에는 작동되지 않는 오류가 있어
-    // 여러 방법들로 해결해보다 해결하지 못해 강제로 새로고침을 주었습니다
-
-    // - 30일 기준 해결방법을 찾아 해결 후 커밋
   };
 
   // ----------------------------------------데이터 추가하기----------------------------------
@@ -137,4 +137,4 @@ const DeletedBtn = styled.button`
   background-color: white;
   border: none;
 `;
-// ----------------------------------styled-component---------------------------------------..
+// ----------------------------------styled-component---------------------------------------...
