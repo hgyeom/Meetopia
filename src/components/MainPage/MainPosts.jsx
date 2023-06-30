@@ -35,11 +35,7 @@ function List() {
   }, [category, location]);
 
   return (
-    <StyledMain>
-      <StyledMainNav>
-        <Loctionlabel>지역</Loctionlabel>
-        <Location />
-      </StyledMainNav>
+    <div>
       <StyledMainposts>
         {posts.map((post) => {
           return (
@@ -53,36 +49,23 @@ function List() {
               <div>
                 <StyledPostContent>{post.content}</StyledPostContent>
                 <hr />
-                <StyledPostUser>{post.nickname}</StyledPostUser>
                 <StyledPostInfo>
                   #{post.category} #{post.location}
                 </StyledPostInfo>
+                <StyledPostUserInfo>
+                  {post.nickname}
+                  <img src={post.profileImg} alt="프로필 사진" />
+                </StyledPostUserInfo>
               </div>
             </StyledMainPost>
           );
         })}
       </StyledMainposts>
-    </StyledMain>
+    </div>
   );
 }
 
 export default List;
-
-const StyledMain = styled.main``;
-
-const StyledMainNav = styled.div`
-  max-width: 1300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  gap: 10px;
-  margin: 0 auto;
-  border: 2px solid #ffcd4a;
-  border-radius: 5px;
-  height: 60px;
-  padding: 13px;
-`;
 
 const StyledMainposts = styled.div`
   max-width: 1300px;
@@ -129,15 +112,19 @@ const StyledPostContent = styled.div`
   overflow: hidden;
 `;
 
-const StyledPostUser = styled.div``;
 const StyledPostInfo = styled.div`
   display: flex;
-  justify-content: space-between;
   padding-top: 8px;
   font-weight: 600;
 `;
 
-const Loctionlabel = styled.div`
-  font-weight: 600;
-  font-size: 1.4rem;
+const StyledPostUserInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  margin-top: 10px;
+  > img {
+    width: 40px;
+    margin-bottom: 10px;
+  }
 `;

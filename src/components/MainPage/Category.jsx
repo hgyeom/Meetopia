@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import { changeCategory, categorys } from '../../redux/modules/category';
+import Location from './Location';
 
 function Category() {
   const dispatch = useDispatch();
@@ -18,17 +19,22 @@ function Category() {
 
   return (
     <StyledCategorySection>
-      <StyledCategoryList>
-        {categorys.map((item) => (
-          <StyledCategory
-            key={item.id}
-            className={index === item.id ? 'active' : null}
-            onClick={() => setCategory(item.id, item.category)}
-          >
-            {item.category}
-          </StyledCategory>
-        ))}
-      </StyledCategoryList>
+      <StyledCategoryNav>
+        <StyledCategoryList>
+          {categorys.map((item) => (
+            <StyledCategory
+              key={item.id}
+              className={index === item.id ? 'active' : null}
+              onClick={() => setCategory(item.id, item.category)}
+            >
+              {item.category}
+            </StyledCategory>
+          ))}
+        </StyledCategoryList>
+        <StyledLocationNav>
+          지역 선택 : <Location />
+        </StyledLocationNav>
+      </StyledCategoryNav>
       <StlyedHr />
     </StyledCategorySection>
   );
@@ -44,9 +50,22 @@ const StyledCategorySection = styled.section`
   margin: 0 auto;
 `;
 
+const StyledCategoryNav = styled.div`
+  padding-top: 60px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledLocationNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 // category list
 const StyledCategoryList = styled.ul`
-  padding-top: 60px;
   display: flex;
 `;
 
