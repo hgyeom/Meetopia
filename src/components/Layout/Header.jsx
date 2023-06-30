@@ -1,7 +1,10 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import '../reset.css';
+import '../../reset.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LogInMenu from './LogInMenu';
+import LogoutMenu from './LogoutMenu';
 
 const StyledHeader = styled.header`
   margin: auto;
@@ -29,35 +32,24 @@ const StyledLink = styled(Link)`
   color: black;
 `;
 
-const StyledHeaderNav = styled.div``;
-
-const StyledHeaderNavButton = styled.button`
-  font-weight: 600;
-  font-size: 1.125rem;
-  outline: none;
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
+const StyledHeaderNav = styled.div`
+  display: flex;
+  gap: 24px;
 `;
 
 function Header() {
+  const { isLogin } = useSelector((state) => {
+    return state.users;
+  });
+  const test = useSelector((state) => {
+    return state.users;
+  });
+  console.log('isLogin ==============>⭐⭐⭐⭐⭐➡️➡️➡️➡️➡️ ', isLogin);
+
   return (
     <StyledHeader>
       <StyledLink to="/">MEETOPIA</StyledLink>
-      <StyledHeaderNav>
-        <StyledHeaderNavButton>
-          <Link
-            to="/detail"
-            style={{
-              textDecoration: 'none',
-              color: 'black'
-            }}
-          >
-            새 글 쓰기
-          </Link>
-        </StyledHeaderNavButton>
-        <StyledHeaderNavButton>로그인</StyledHeaderNavButton>
-      </StyledHeaderNav>
+      <StyledHeaderNav>{isLogin ? <LogInMenu /> : <LogoutMenu />}</StyledHeaderNav>
     </StyledHeader>
   );
 }

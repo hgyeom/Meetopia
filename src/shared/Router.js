@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
+import Login from '../components/LoginPage/login';
+import Signup from '../components/LoginPage/signup';
 import Mypage from '../pages/Mypage';
 import Edit from '../pages/MypageEdit';
 import Comments from '../components/CommentsPage';
@@ -13,7 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCurrentUser } from '../redux/modules/users';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/Layout';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -23,14 +25,31 @@ const Router = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       console.log('지나감 => ', user);
-      dispatch(
-        addCurrentUser({
-          userid: user.uid,
-          email: user.email,
-          nickname: user.displayName,
-          profileImg: user.photoURL
-        })
-      );
+      if (user) {
+        dispatch(
+          addCurrentUser(
+            {
+              userid: user.uid,
+              email: user.email,
+              nickname: user.displayName,
+              profileImg: user.photoURL
+            },
+            true
+          )
+        );
+      } else {
+        dispatch(
+          addCurrentUser(
+            {
+              userid: null,
+              email: null,
+              nickname: null,
+              profileImg: null
+            },
+            false
+          )
+        );
+      }
       // console.log('현재 로그인한 유저의 정보3', auth.currentUser);
       // console.log(user.uid);
       // console.log(user.displayName);
@@ -43,6 +62,8 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/users/:id" element={<Mypage />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/mypage/edit" element={<Edit />} />
           <Route path="/:id" element={<Comments />} />
