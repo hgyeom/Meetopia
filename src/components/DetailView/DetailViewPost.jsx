@@ -88,7 +88,7 @@ function DetailViewPost() {
           <ContentPostBox>{post?.content}</ContentPostBox>
         </ContentBox>
       </content>
-      <Comments postId={id} nickname={nickname} />
+      <Comments postId={id} nickname={nickname} userid={userid} />
     </div>
   );
 }
