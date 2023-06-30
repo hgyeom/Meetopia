@@ -111,7 +111,7 @@ function Comments({ postId, nickname }) {
     background-color: white;
     border: none;
   `;
-  // ----------------------------------styled-component--------------------------------------
+  // ----------------------------------styled-component---------------------------------------..
   console.log('comments', comments);
   return (
     <div>
@@ -176,3 +176,5 @@ function Comments({ postId, nickname }) {
 }
 
 export default Comments;
+
+123123123123312321312312313213123;
