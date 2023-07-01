@@ -1,9 +1,11 @@
 import { collection, query, getDocs, doc, updateDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
-import { styled } from 'styled-components';
+import * as S from './DetailUpdate.styled';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ButtonXsGray } from '../Common.styled';
+import { styled } from 'styled-components';
 
 function DetailUpdate() {
   const { nickname } = useSelector((state) => {
@@ -122,16 +124,16 @@ function DetailUpdate() {
 
   return (
     <>
-      <PostLayout>
-        <MainTitle>[모임 만들기 글 수정]</MainTitle>
+      <S.PostLayout>
+        <S.MainTitle>[모임 만들기 글 수정]</S.MainTitle>
         <content>
           <form onSubmit={updatePost}>
-            <ContentBox2>
+            <S.ContentBox2>
               <label>제목: </label>
               <input type="text" name="title" value={title} onChange={onChange} />
-              <WriterLabel>작성자명: {nickname}</WriterLabel>
-            </ContentBox2>
-            <ContentBox>
+              <S.WriterLabel>작성자명: {nickname}</S.WriterLabel>
+            </S.ContentBox2>
+            <S.ContentBox>
               주제별:
               <select name="category" value={selectTopic} onChange={handleSelectTopic}>
                 {selectTopicList.map((item) => {
@@ -152,9 +154,9 @@ function DetailUpdate() {
                   );
                 })}
               </select>
-            </ContentBox>
-            <ContentWriteLabel>모임을 소개해주세요!</ContentWriteLabel>
-            <ContentWriteBox>
+            </S.ContentBox>
+            <S.ContentWriteLabel>모임을 소개해주세요!</S.ContentWriteLabel>
+            <S.ContentWriteBox>
               <textarea
                 style={{
                   resize: 'none'
@@ -166,75 +168,18 @@ function DetailUpdate() {
                 value={content}
                 onChange={onChange}
               ></textarea>
-            </ContentWriteBox>
-            <BtnBox>
-              <button>수정 완료</button>
+            </S.ContentWriteBox>
+            <S.BtnBox>
               <Link to={`/detail/${postId}`}>
-                <button>취소</button>
+                <ButtonXsGray>취소</ButtonXsGray>
               </Link>
-            </BtnBox>
+              <ButtonXsGray>수정 완료</ButtonXsGray>
+            </S.BtnBox>
           </form>
         </content>
-      </PostLayout>
+      </S.PostLayout>
     </>
   );
 }
 
 export default DetailUpdate;
-const MainTitle = styled.h2`
-  font-size: larger;
-  font-weight: 600;
-  margin: 10px;
-`;
-
-const SubTitle = styled.h2`
-  font-size: small;
-  font-weight: 600;
-  margin: 10px;
-`;
-
-const ContentBox = styled.div`
-  border-bottom: 4px solid #ffcd4a;
-  margin: 10px;
-  padding: 10px;
-  margin-top: 1px;
-`;
-
-const ContentBox2 = styled.div`
-  border-bottom: 4px solid #ffcd4a;
-  margin: 10px;
-  margin-top: 36px;
-  padding: 10px;
-`;
-
-const PostLayout = styled.div`
-  margin-left: 385px;
-  margin-right: 385px;
-`;
-
-const ContentWriteBox = styled.div`
-  border-bottom: 4px solid #ffcd4a;
-  margin: 10px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-`;
-
-const ContentWriteLabel = styled.p`
-  text-align: center;
-  font-weight: 600;
-  font-size: 18px;
-  padding-top: 12px;
-`;
-
-const BtnBox = styled.div`
-  display: flex;
-  justify-content: center;
-
-  /* margin-right: 240px; */
-  /* justify-content: center; */
-`;
-
-const WriterLabel = styled.span`
-  margin-left: 20px;
-`;
