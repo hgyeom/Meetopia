@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import Category from './Category';
 import MainPosts from './MainPosts';
+import Topbutton from './TopButton';
 
 function Index() {
   return (
@@ -9,6 +10,7 @@ function Index() {
       <Banner />
       <Category />
       <MainPosts />
+      <Topbutton />
     </div>
   );
 }
