@@ -1,11 +1,10 @@
 import { collection, query, getDocs, doc, updateDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
-import * as S from './DetailUpdate.styled';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import * as S from './DetailPost.styled';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ButtonXsGray } from '../Common.styled';
-import { styled } from 'styled-components';
+import { Button, ButtonGray, Input, Select, Textarea } from '../Common.styled';
 
 function DetailUpdate() {
   const { nickname } = useSelector((state) => {
@@ -123,62 +122,61 @@ function DetailUpdate() {
   };
 
   return (
-    <>
-      <S.PostLayout>
-        <S.MainTitle>[모임 만들기 글 수정]</S.MainTitle>
-        <content>
-          <form onSubmit={updatePost}>
-            <S.ContentBox2>
-              <label>제목: </label>
-              <input type="text" name="title" value={title} onChange={onChange} />
-              <S.WriterLabel>작성자명: {nickname}</S.WriterLabel>
-            </S.ContentBox2>
-            <S.ContentBox>
-              주제별:
-              <select name="category" value={selectTopic} onChange={handleSelectTopic}>
-                {selectTopicList.map((item) => {
-                  return (
-                    <option value={item.value} key={item.value}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
-              지역별:
-              <select name="location" value={selectLocation} onChange={handleSelectLocation}>
-                {selectLocationList.map((item) => {
-                  return (
-                    <option value={item.value} key={item.value}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </S.ContentBox>
-            <S.ContentWriteLabel>모임을 소개해주세요!</S.ContentWriteLabel>
-            <S.ContentWriteBox>
-              <textarea
-                style={{
-                  resize: 'none'
-                }}
-                rows="30"
-                cols="80"
-                type="text"
-                name="content"
-                value={content}
-                onChange={onChange}
-              ></textarea>
-            </S.ContentWriteBox>
-            <S.BtnBox>
-              <Link to={`/detail/${postId}`}>
-                <ButtonXsGray>취소</ButtonXsGray>
-              </Link>
-              <ButtonXsGray>수정 완료</ButtonXsGray>
-            </S.BtnBox>
-          </form>
-        </content>
-      </S.PostLayout>
-    </>
+    <div>
+      <S.MainTitle>[모임 만들기 글 수정]</S.MainTitle>
+      <content>
+        <form onSubmit={updatePost}>
+          <S.ContentBox2>
+            <label>제목: </label>
+            <Input type="text" name="title" value={title} onChange={onChange} />
+            <label>작성자명: </label>
+            <S.WriterLabel>{nickname}</S.WriterLabel>
+          </S.ContentBox2>
+          <S.ContentBox>
+            <label>주제별: </label>
+            <Select name="category" value={selectTopic} onChange={handleSelectTopic}>
+              {selectTopicList.map((item) => {
+                return (
+                  <option value={item.value} key={item.value}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </Select>
+            <label>지역별: </label>
+            <Select name="location" value={selectLocation} onChange={handleSelectLocation}>
+              {selectLocationList.map((item) => {
+                return (
+                  <option value={item.value} key={item.value}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </Select>
+          </S.ContentBox>
+          <S.ContentWriteLabel>모임을 소개해주세요!</S.ContentWriteLabel>
+          <S.ContentWriteBox>
+            <Textarea
+              style={{
+                resize: 'none'
+              }}
+              rows="30"
+              cols="80"
+              type="text"
+              name="content"
+              value={content}
+              onChange={onChange}
+            ></Textarea>
+          </S.ContentWriteBox>
+          <S.BtnBox>
+            <ButtonGray type="button" onClick={() => navigate('/')}>
+              취소
+            </ButtonGray>
+            <Button>수정 완료</Button>
+          </S.BtnBox>
+        </form>
+      </content>
+    </div>
   );
 }
 

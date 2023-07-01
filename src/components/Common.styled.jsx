@@ -81,7 +81,7 @@ export const ButtonLgGray = styled(ButtonLg)`
 
 export const Title = styled.h2`
   font-family: 'Black Han Sans', sans-serif;
-  margin: 0 0 24px;
+  margin: 0 0 36px;
   font-size: 40px;
   font-weight: 600;
 `;
@@ -90,10 +90,15 @@ export const SubTitle = styled.h3`
   margin: 64px 0 24px;
   font-size: 24px;
   font-weight: 600;
+
+  &:first-child {
+    margin-top: 24px;
+  }
 `;
 
 const commonButtonStyles = css`
   display: inline-block;
+  box-sizing: border-box;
   position: relative;
   width: 100%;
   height: 48px;
@@ -114,4 +119,9 @@ export const Input = styled.input`
 `;
 export const Select = styled.select`
   ${commonButtonStyles}
+`;
+
+export const Textarea = styled.textarea`
+  ${commonButtonStyles}
+  height: 300px;
 `;

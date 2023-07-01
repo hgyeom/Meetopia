@@ -7,5 +7,6 @@ export const theme = {
   colorPrimaryHover: '#f9c12e',
   colorGray: '#dedede',
   colorGrayHover: '#d8d7d7',
-  borderRadius: '8px'
+  borderRadius: '8px',
+  contentWidth: '1300px'
 };

@@ -49,6 +49,10 @@ export default Banner;
 
 const StyledBannerContainer = styled.div`
   overflow: hidden;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  translate: -50% 0;
 `;
 
 const StyledBannerItems = styled.div`

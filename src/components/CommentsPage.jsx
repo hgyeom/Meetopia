@@ -2,7 +2,8 @@ import { addDoc, collection, getDocs, query, deleteDoc, doc, orderBy } from 'fir
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../firebase';
-import { styled } from 'styled-components';
+import * as S from './CommentsPage.styled';
+import { Input } from './Common.styled';
 
 // -------------------------------------useState관리--------------------------------------
 function Comments({ postId, nickname, userid }) {
@@ -73,10 +74,10 @@ function Comments({ postId, nickname, userid }) {
   return (
     <div>
       <div>
-        <MainLabel>댓글</MainLabel>
-        <StF>
+        <S.MainLabel>댓글</S.MainLabel>
+        <S.StF>
           <br />
-          <input
+          <Input
             name="내용"
             value={comment}
             onChange={(event) => {
@@ -84,34 +85,34 @@ function Comments({ postId, nickname, userid }) {
             }}
           />
           <br />
-          <AddBtn type="submit" onClick={addComment}>
+          <S.AddBtn type="submit" onClick={addComment}>
             등록
-          </AddBtn>
-        </StF>
+          </S.AddBtn>
+        </S.StF>
       </div>
       <div style={{}}>
         {comments.map((comment) => {
           return (
-            <CommentBox key={comment?.commentsId}>
+            <S.CommentBox key={comment?.commentsId}>
               <p>
-                <Label>닉네임 : </Label>
+                <S.Label>닉네임 : </S.Label>
                 {comment.nickname}
               </p>
 
               <p>
-                <Label>내용 : </Label>
+                <S.Label>내용 : </S.Label>
                 {comment.comment}
               </p>
               {comment.userid === userid && (
-                <DeletedBtn
+                <S.DeletedBtn
                   onClick={() => {
                     deleteComment(comment.id);
                   }}
                 >
                   댓글삭제
-                </DeletedBtn>
+                </S.DeletedBtn>
               )}
-            </CommentBox>
+            </S.CommentBox>
           );
         })}
       </div>
@@ -120,41 +121,3 @@ function Comments({ postId, nickname, userid }) {
 }
 
 export default Comments;
-
-// ----------------------------------styled-component-----------------------------------
-const StF = styled.form`
-  display: flex;
-  justify-content: center;
-`;
-
-const AddBtn = styled.button`
-  margin-left: 15px;
-`;
-
-const CommentBox = styled.div`
-  border-bottom: 2px solid #dedede;
-  padding: 10px;
-  margin: 10px;
-`;
-
-const DeletedBtn = styled.button`
-  /* background-color: white;
-  border: none; */
-  /* 지영님 이건 어떤가요 */
-  margin-left: auto;
-  display: flex;
-  justify-content: flex-end;
-  cursor: pointer;
-`;
-
-const MainLabel = styled.label`
-  margin-left: 17px;
-  font-size: 22px;
-  font-weight: 600;
-`;
-
-const Label = styled.span`
-  font-weight: 600;
-`;
-
-// ----------------------------------styled-component---------------------------------------...
