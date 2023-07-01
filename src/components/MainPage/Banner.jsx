@@ -56,6 +56,7 @@ const StyledBannerItems = styled.div`
   display: flex;
   transition: transform 0.5s ease;
   transform: translateX(-${(props) => props.currentindex * 100}vw);
+  /* transform: translateX(-${(props) => props.currentindex * props.theme.contentWidth}); */
 `;
 
 const StyledBannerItem = styled.div`

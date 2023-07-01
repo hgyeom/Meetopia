@@ -1,10 +1,11 @@
 import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { styled } from 'styled-components';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 import Comments from '../CommentsPage';
+import * as S from './DetailViewPost.styled';
+import { ButtonXs, ButtonXsGray } from '../Common.styled';
 
 function DetailViewPost() {
   const { nickname, userid } = useSelector((state) => {
@@ -58,85 +59,43 @@ function DetailViewPost() {
   };
 
   return (
-    <PostLayout>
-      <content>
+    <div>
+      <div>
         <div>
-          <PostTitle>{post?.title}</PostTitle>
-          <ContentBox>
+          <S.PostTitle>{post?.title}</S.PostTitle>
+          <S.ContentBox>
             {/* p태그 공백 삭제 하지 말아주세요! */}
             <p>
-              <Label>작성자명: </Label> {postNickname}
+              <S.Label>작성자명: </S.Label> {postNickname}
             </p>
             <br />
             <p>
-              <Label>작성일: </Label>
+              <S.Label>작성일: </S.Label>
               {post?.days}
             </p>
-          </ContentBox>
+          </S.ContentBox>
         </div>
-        <ContentBox>
+        <S.ContentBox>
           <p>
-            <Label>주제별: </Label> {post?.category}
+            <S.Label>주제별: </S.Label> {post?.category}
           </p>
           <br />
           <p>
-            <Label>지역별: </Label> {post?.location}
+            <S.Label>지역별: </S.Label> {post?.location}
           </p>
-        </ContentBox>
-        <ContentBox>
-          <LabelContent>모임을 소개해주세요!</LabelContent>
-          <ContentPostBox>{post?.content}</ContentPostBox>
-          <ButtonBox>
-            {userid == postUserid ? <button onClick={onEditButton}>수정</button> : null}
-            {userid == postUserid ? <button onClick={onDelButton}>삭제</button> : null}
-          </ButtonBox>
-        </ContentBox>
-      </content>
+        </S.ContentBox>
+        <S.ContentBox>
+          <S.LabelContent>모임을 소개해주세요!</S.LabelContent>
+          <S.ContentPostBox>{post?.content}</S.ContentPostBox>
+          <S.ButtonBox>
+            {userid == postUserid ? <ButtonXs onClick={onEditButton}>수정</ButtonXs> : null}
+            {userid == postUserid ? <ButtonXsGray onClick={onDelButton}>삭제</ButtonXsGray> : null}
+          </S.ButtonBox>
+        </S.ContentBox>
+      </div>
       <Comments postId={id} nickname={nickname} userid={userid} />
-    </PostLayout>
+    </div>
   );
 }
 
 export default DetailViewPost;
-
-const PostTitle = styled.p`
-  font-size: xx-large;
-  font-weight: 800;
-  margin: 10px;
-  margin-bottom: 13px;
-`;
-
-const ContentBox = styled.div`
-  border-bottom: 2px solid #dedede;
-  margin: 10px;
-  padding: 10px;
-`;
-
-const ContentPostBox = styled.div`
-  border-radius: 35px;
-  border: 6px solid #ffcd4a;
-  margin: 10px;
-  padding: 20px;
-  height: 400px;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const LabelContent = styled.label`
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
-`;
-
-const PostLayout = styled.div`
-  margin-left: 385px;
-  margin-right: 385px;
-`;
-
-const Label = styled.span`
-  font-weight: 600;
-`;

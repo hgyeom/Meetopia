@@ -1,6 +1,37 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
+export const Header = styled.header`
+  margin: auto;
+  max-width: ${(props) => props.theme.contentWidth};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 85px;
+  padding: 0 40px;
+
+  font-weight: 800;
+  font-size: 1.5rem;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  color: black;
+`;
+
+export const HeaderNav = styled.div`
+  display: flex;
+  gap: 24px;
+`;
+
 export const HeaderNavButton = styled.button`
   font-weight: 600;
   font-size: 1.125rem;
