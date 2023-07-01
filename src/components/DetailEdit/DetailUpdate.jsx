@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { Button, ButtonGray, Input, Select, Textarea } from '../Common.styled';
 
 function DetailUpdate() {
-  const { nickname } = useSelector((state) => {
+  const { nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
 
@@ -116,7 +116,8 @@ function DetailUpdate() {
       title: title,
       content: content,
       category: selectTopic,
-      location: selectLocation
+      location: selectLocation,
+      profileImg
     });
     navigate(`/detail/${postId}`);
   };
