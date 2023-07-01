@@ -15,7 +15,10 @@ export const Header = styled.header`
 `;
 
 export const StyledLink = styled(Link)`
+  display: inline-block;
+  height: 36px;
   text-decoration: none;
+  color: black;
 
   &:focus,
   &:hover,
@@ -24,7 +27,11 @@ export const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
-  color: black;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
 
 export const HeaderNav = styled.div`
@@ -41,14 +48,14 @@ export const HeaderNavButton = styled.button`
   cursor: pointer;
 `;
 
-export const ImgBoxSM = styled.div`
+export const ProfileImgBoxSM = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex: none;
   overflow: hidden;
-  width: 54px;
-  height: 54px;
+  width: 46px;
+  height: 46px;
   margin: 16px 0;
   border-radius: 100%;
 

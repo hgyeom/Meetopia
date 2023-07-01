@@ -11,7 +11,12 @@ function Header() {
 
   return (
     <S.Header>
-      <S.StyledLink to="/">MEETOPIA</S.StyledLink>
+      <S.StyledLink to="/">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/meetopia-3d45e.appspot.com/o/logo.png?alt=media&token=54dfe689-637c-4cfc-a4a7-891623cd55d7"
+          alt="MEETOPIA"
+        />
+      </S.StyledLink>
       <S.HeaderNav>{isLogin ? <LogInMenu /> : <LogoutMenu />}</S.HeaderNav>
     </S.Header>
   );
