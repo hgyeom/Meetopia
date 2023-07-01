@@ -26,7 +26,6 @@ const Router = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('라우터 실행', user);
         dispatch(
           addCurrentUser(
             {
