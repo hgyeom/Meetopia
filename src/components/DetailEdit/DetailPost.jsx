@@ -1,10 +1,11 @@
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { db } from '../../firebase';
-import { styled } from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
 import shortid from 'shortid';
 import { useSelector } from 'react-redux';
+import * as S from './DetailPost.styled';
+import { ButtonXsGray } from '../Common.styled';
 
 function DetailPost() {
   const { nickname, userid, profileImg } = useSelector((state) => {
@@ -110,16 +111,16 @@ function DetailPost() {
     navigate(`/detail/${newDocId}`);
   };
   return (
-    <PostLayout>
-      <MainTitle>[모임 만들기 글 작성]</MainTitle>
+    <S.PostLayout>
+      <S.MainTitle>[모임 만들기 글 작성]</S.MainTitle>
       <br />
       <content>
         <form onSubmit={addPost}>
-          <ContentBox>
+          <S.ContentBox>
             <label>제목: </label>
             <input type="text" name="title" value={title} onChange={onChange} />
-          </ContentBox>
-          <ContentBox>
+          </S.ContentBox>
+          <S.ContentBox>
             주제별:
             <select name="category" value={selectTopic} onChange={handleSelectTopic}>
               {selectTopicList.map((item) => {
@@ -140,9 +141,9 @@ function DetailPost() {
                 );
               })}
             </select>
-          </ContentBox>
-          <ContentWriteLabel>모임을 소개해주세요!</ContentWriteLabel>
-          <ContentWriteBox>
+          </S.ContentBox>
+          <S.ContentWriteLabel>모임을 소개해주세요!</S.ContentWriteLabel>
+          <S.ContentWriteBox>
             <textarea
               style={{
                 resize: 'none'
@@ -154,59 +155,17 @@ function DetailPost() {
               value={content}
               onChange={onChange}
             ></textarea>
-          </ContentWriteBox>
-          <BtnBox>
-            <button>작성 완료</button>
+          </S.ContentWriteBox>
+          <S.BtnBox>
             <Link to="/">
-              <button>취소</button>
+              <ButtonXsGray>취소</ButtonXsGray>
             </Link>
-          </BtnBox>
+            <ButtonXsGray>작성 완료</ButtonXsGray>
+          </S.BtnBox>
         </form>
       </content>
-    </PostLayout>
+    </S.PostLayout>
   );
 }
 
 export default DetailPost;
-
-//css
-
-const MainTitle = styled.h2`
-  font-size: larger;
-  font-weight: 600;
-  margin: 10px;
-`;
-
-const ContentBox = styled.div`
-  border-bottom: 4px solid #ffcd4a;
-  margin: 10px;
-  padding: 10px;
-`;
-
-const PostLayout = styled.div`
-  margin-left: 385px;
-  margin-right: 385px;
-`;
-
-const ContentWriteBox = styled.div`
-  border-bottom: 4px solid #ffcd4a;
-  margin: 10px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-`;
-
-const ContentWriteLabel = styled.p`
-  text-align: center;
-  font-weight: 600;
-  font-size: 18px;
-  padding-top: 12px;
-`;
-
-const BtnBox = styled.div`
-  display: flex;
-  justify-content: center;
-
-  /* margin-right: 240px; */
-  /* justify-content: center; */
-`;
