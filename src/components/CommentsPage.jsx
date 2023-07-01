@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../firebase';
 import * as S from './CommentsPage.styled';
+import { Input } from './Common.styled';
 
 // -------------------------------------useState관리--------------------------------------
 function Comments({ postId, nickname, userid }) {
@@ -76,7 +77,7 @@ function Comments({ postId, nickname, userid }) {
         <S.MainLabel>댓글</S.MainLabel>
         <S.StF>
           <br />
-          <input
+          <Input
             name="내용"
             value={comment}
             onChange={(event) => {
@@ -120,7 +121,3 @@ function Comments({ postId, nickname, userid }) {
 }
 
 export default Comments;
-
-// ----------------------------------styled-component-----------------------------------
-
-// ----------------------------------styled-component---------------------------------------...

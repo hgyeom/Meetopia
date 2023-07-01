@@ -1,11 +1,11 @@
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { db } from '../../firebase';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import shortid from 'shortid';
 import { useSelector } from 'react-redux';
 import * as S from './DetailPost.styled';
-import { ButtonXsGray } from '../Common.styled';
+import { Button, ButtonGray, ButtonXs, ButtonXsGray, Input, Select, SubTitle, Textarea, Title } from '../Common.styled';
 
 function DetailPost() {
   const { nickname, userid, profileImg } = useSelector((state) => {
@@ -111,18 +111,19 @@ function DetailPost() {
     navigate(`/detail/${newDocId}`);
   };
   return (
-    <S.PostLayout>
-      <S.MainTitle>[모임 만들기 글 작성]</S.MainTitle>
+    <div>
+      {/* <S.MainTitle>[모임 만들기 글 작성]</S.MainTitle> */}
+      <SubTitle>모임 만들기 글 작성</SubTitle>
       <br />
       <content>
         <form onSubmit={addPost}>
           <S.ContentBox>
             <label>제목: </label>
-            <input type="text" name="title" value={title} onChange={onChange} />
+            <Input type="text" name="title" value={title} onChange={onChange} />
           </S.ContentBox>
           <S.ContentBox>
-            주제별:
-            <select name="category" value={selectTopic} onChange={handleSelectTopic}>
+            <label>주제별: </label>
+            <Select name="category" value={selectTopic} onChange={handleSelectTopic}>
               {selectTopicList.map((item) => {
                 return (
                   <option value={item.value} key={item.value}>
@@ -130,9 +131,9 @@ function DetailPost() {
                   </option>
                 );
               })}
-            </select>
-            지역별:
-            <select name="location" value={selectLocation} onChange={handleSelectLocation}>
+            </Select>
+            <label>지역별: </label>
+            <Select name="location" value={selectLocation} onChange={handleSelectLocation}>
               {selectLocationList.map((item) => {
                 return (
                   <option value={item.value} key={item.value}>
@@ -140,11 +141,11 @@ function DetailPost() {
                   </option>
                 );
               })}
-            </select>
+            </Select>
           </S.ContentBox>
           <S.ContentWriteLabel>모임을 소개해주세요!</S.ContentWriteLabel>
           <S.ContentWriteBox>
-            <textarea
+            <Textarea
               style={{
                 resize: 'none'
               }}
@@ -154,17 +155,15 @@ function DetailPost() {
               name="content"
               value={content}
               onChange={onChange}
-            ></textarea>
+            ></Textarea>
           </S.ContentWriteBox>
           <S.BtnBox>
-            <Link to="/">
-              <ButtonXsGray>취소</ButtonXsGray>
-            </Link>
-            <ButtonXsGray>작성 완료</ButtonXsGray>
+            <ButtonGray onClick={() => navigate('/')}>취소</ButtonGray>
+            <Button>작성 완료</Button>
           </S.BtnBox>
         </form>
       </content>
-    </S.PostLayout>
+    </div>
   );
 }
 

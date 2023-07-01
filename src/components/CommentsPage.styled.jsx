@@ -1,11 +1,17 @@
 import { styled } from 'styled-components';
+import { ButtonXs, ButtonXsGray } from './Common.styled';
 
 export const StF = styled.form`
   display: flex;
   justify-content: center;
+  padding: 12px 0;
+
+  > button {
+    flex: none;
+  }
 `;
 
-export const AddBtn = styled.button`
+export const AddBtn = styled(ButtonXs)`
   margin-left: 15px;
 `;
 
@@ -15,7 +21,7 @@ export const CommentBox = styled.div`
   margin: 10px;
 `;
 
-export const DeletedBtn = styled.button`
+export const DeletedBtn = styled(ButtonXsGray)`
   /* background-color: white;
   border: none; */
   /* 지영님 이건 어떤가요 */

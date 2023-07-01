@@ -15,7 +15,7 @@ const S = {
   Container: styled.div`
     max-width: ${(props) => props.theme.contentWidth};
     margin: 0 auto;
-    padding: 28px 40px;
+    padding: 0 40px 28px;
   `
 };
 
