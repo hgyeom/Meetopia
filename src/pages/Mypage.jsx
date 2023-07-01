@@ -5,6 +5,7 @@ import Profile from '../components/Mypage/Profile';
 import MyPosts from '../components/Mypage/MyPosts';
 import { ButtonXs, SubTitle, Title } from '../components/Common.styled';
 import { useSelector } from 'react-redux';
+import Topbutton from '../components/MainPage/TopButton';
 
 const Mypage = () => {
   // Login Required
@@ -28,6 +29,7 @@ const Mypage = () => {
       <Profile />
       <SubTitle>내 작성글</SubTitle>
       <MyPosts />
+      <Topbutton />
     </S.MypageContainer>
   );
 };
