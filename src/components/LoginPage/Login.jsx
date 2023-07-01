@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import LoginDiv from './Loginpage.styled';
 import { signInWithEmailAndPassword } from '@firebase/auth';
+import { Input } from '../Common.styled';
 // import { signOut } from '@firebase/auth';
 
 function Login() {
@@ -24,7 +25,6 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, Email, PW);
       console.log('user with signIn', userCredential.user);
 
-      
       navigate('/');
     } catch (error) {
       console.log(error.code);
@@ -34,7 +34,6 @@ function Login() {
         alert('비밀번호가 일치하지 않습니다.');
       } else {
         alert('로그인이 실패하였습니다.');
-       
       }
     }
   };
@@ -44,7 +43,6 @@ function Login() {
       navigate('/');
     }
   }, [user, navigate]);
-
 
   // const logOut = async (event) => {
   //   event.preventDefault();
@@ -57,21 +55,21 @@ function Login() {
       <form>
         <span>Login</span>
         <label></label>
-        <input
+        <Input
           type="email"
           placeholder="이메일 입력해주세요."
           value={Email}
           name="email"
           onChange={(e) => setEmail(e.currentTarget.value)}
-        ></input>
+        ></Input>
         <br></br>
-        <input
+        <Input
           type="password"
           placeholder="비밀번호를 입력해주세요."
           value={PW}
           name="password"
           onChange={(e) => setPW(e.currentTarget.value)}
-        ></input>
+        ></Input>
         <br></br>
         <button onClick={signInFunc}>로그인</button>
         <br></br>
@@ -85,9 +83,8 @@ function Login() {
           회원가입
         </button>
         {/* <button onClick={logOut}>로그아웃</button> */}
-        </form>
+      </form>
     </LoginDiv>
- 
   );
 }
 

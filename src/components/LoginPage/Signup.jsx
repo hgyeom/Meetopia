@@ -6,6 +6,7 @@ import LoginDiv from './Loginpage.styled';
 import shortid from 'shortid';
 import { useDispatch } from 'react-redux';
 import { updateCurrentUser } from '../../redux/modules/users';
+import { Input } from '../Common.styled';
 
 function Signup() {
   const navigate = useNavigate();
@@ -64,28 +65,28 @@ function Signup() {
       <form>
         <span>Sign Up</span>
         <label>EMAIL</label>
-        <input
+        <Input
           type="email"
           placeholder="이메일을 입력하세요."
           value={Email}
           name="Email"
           onChange={(e) => setEmail(e.currentTarget.value)}
-        ></input>
+        ></Input>
         <label>PASSWORD</label>
-        <input
+        <Input
           type="password"
           placeholder="비밀번호"
           value={PW}
           name="password"
           onChange={(e) => setPW(e.currentTarget.value)}
-        ></input>
-        <input
+        ></Input>
+        <Input
           type="password"
           placeholder="비밀번호확인"
           value={PWConfirm}
           name="PWConfirm"
           onChange={(e) => setPWConfirm(e.currentTarget.value)}
-        ></input>
+        ></Input>
         <br></br>
         <button onClick={signupFunc}> 회원가입</button>
         <br></br>
