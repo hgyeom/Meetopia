@@ -73,7 +73,6 @@ const ProfileForm = () => {
       downloadURL = await getDownloadURL(imageRef);
 
       // 리덕스에 수정할 유저정보 전달
-      console.log('리덕스 프로필폼');
       dispatch(
         updateCurrentUser({
           nickname: reNickname,
@@ -87,7 +86,7 @@ const ProfileForm = () => {
       });
     }
 
-    // navigate('/mypage');
+    navigate('/mypage');
   };
 
   return (

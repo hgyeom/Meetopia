@@ -6,7 +6,6 @@ const Profile = () => {
   const { email, nickname, profileImg } = useSelector((state) => {
     return state.users.currentUser;
   });
-  console.log(profileImg);
 
   return (
     <form>

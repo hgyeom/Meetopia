@@ -125,7 +125,7 @@ function DetailUpdate() {
   return (
     <div>
       <S.MainTitle>[모임 만들기 글 수정]</S.MainTitle>
-      <content>
+      <section>
         <form onSubmit={updatePost}>
           <S.ContentBox2>
             <label>제목: </label>
@@ -176,7 +176,7 @@ function DetailUpdate() {
             <Button>수정 완료</Button>
           </S.BtnBox>
         </form>
-      </content>
+      </section>
     </div>
   );
 }

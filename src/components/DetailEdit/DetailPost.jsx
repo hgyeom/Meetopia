@@ -115,7 +115,7 @@ function DetailPost() {
       {/* <S.MainTitle>[모임 만들기 글 작성]</S.MainTitle> */}
       <SubTitle>모임 만들기 글 작성</SubTitle>
       <br />
-      <content>
+      <section>
         <form onSubmit={addPost}>
           <S.ContentBox>
             <label>제목: </label>
@@ -162,7 +162,7 @@ function DetailPost() {
             <Button>작성 완료</Button>
           </S.BtnBox>
         </form>
-      </content>
+      </section>
     </div>
   );
 }

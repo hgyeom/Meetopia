@@ -44,9 +44,9 @@ const LogInMenu = () => {
         </Link>
       </S.HeaderNavButton>
       <S.ProfileLink to="/mypage">
-        <S.ImgBoxSM>
+        <S.ProfileImgBoxSM>
           <img src={profileImg} alt="프로필 사진" />
-        </S.ImgBoxSM>
+        </S.ProfileImgBoxSM>
         {nickname}
       </S.ProfileLink>
     </>

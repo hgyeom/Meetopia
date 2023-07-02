@@ -3,7 +3,8 @@ import { styled } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
-import PostItem from './PostItem';
+// import PostItem from './PostItem';
+import PostItem from '../MainPage/PostItem';
 import shortid from 'shortid';
 
 const MyPosts = () => {
@@ -29,6 +30,7 @@ const MyPosts = () => {
     <PostsContainer>
       {posts.map((post) => {
         return <PostItem post={post} key={shortid.generate()} />;
+        // return <PostItem post={post} key={shortid.generate()} />;
       })}
     </PostsContainer>
   );

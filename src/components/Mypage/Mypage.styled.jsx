@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const S = {
   MypageContainer: styled.div`
-    max-width: 690px;
+    max-width: 820px;
     margin: 0 auto;
     padding: 28px 40px;
   `,
