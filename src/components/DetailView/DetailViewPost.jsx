@@ -60,7 +60,7 @@ function DetailViewPost() {
 
   return (
     <div>
-      <div>
+      <section>
         <div>
           <S.PostTitle>{post?.title}</S.PostTitle>
           <S.ContentBox>
@@ -92,7 +92,7 @@ function DetailViewPost() {
             {userid == postUserid ? <ButtonXsGray onClick={onDelButton}>삭제</ButtonXsGray> : null}
           </S.ButtonBox>
         </S.ContentBox>
-      </div>
+      </section>
       <Comments postId={id} nickname={nickname} userid={userid} />
     </div>
   );

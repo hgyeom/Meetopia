@@ -23,7 +23,6 @@ function Login() {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, Email, PW);
-      console.log('user with signIn', userCredential.user);
 
       navigate('/');
     } catch (error) {
@@ -43,12 +42,6 @@ function Login() {
       navigate('/');
     }
   }, [user, navigate]);
-
-  // const logOut = async (event) => {
-  //   event.preventDefault();
-  //   console.log('로그아웃 됨')
-  //   await signOut(auth);
-  // };
 
   return (
     <LoginDiv>
