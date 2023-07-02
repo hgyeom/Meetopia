@@ -53,4 +53,5 @@ const TopButton = styled.button`
   background-color: #ffcd4a;
   font-size: large;
   font-weight: 600;
+  cursor: pointer;
 `;
