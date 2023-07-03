@@ -46,7 +46,7 @@
       - 마이페이지에서는 내 작성글과 닉네임, 프로필 이미지 수정이 가능
 
  ## 와이어 프레임
- *<img src = "https://velog.velcdn.com/images/summer_dev/post/01f89cd8-e8af-49cd-b0d8-700912c25663/image.png"
+ *<img src = "https://velog.velcdn.com/images/summer_dev/post/01f89cd8-e8af-49cd-b0d8-700912c25663/image.png">
   
   
 
