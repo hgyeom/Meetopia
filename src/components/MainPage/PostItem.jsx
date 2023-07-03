@@ -20,7 +20,7 @@ const PostItem = ({ post }) => {
         </StyledPostInfo>
         <StyledPostUserInfo>
           {post.nickname}
-          <img src={post.profileImg} alt="프로필 사진" />
+          <StyledPostUserPofileImg src={post.profileImg} alt="프로필 사진" />
         </StyledPostUserInfo>
       </div>
     </StyledMainPost>
@@ -33,10 +33,10 @@ const StyledMainPost = styled.div`
   margin-top: 15px;
   display: flex;
   flex-direction: column;
-  padding: 20px 25px 0;
+  padding: 20px 25px;
   width: 19%;
   min-width: 200px;
-  height: 250px;
+  height: 300px;
   background: #fff;
   border: 2px solid #dedede;
   border-radius: 30px;
@@ -47,15 +47,15 @@ const StyledPostTitle = styled.div`
   margin-top: 20px;
   font-size: 20px;
   font-weight: 700;
-  height: 35px;
+  min-height: 30px;
 `;
 
 const StyledPostContent = styled.div`
   font-size: 15px;
-  min-height: 100px;
+  height: 150px;
   line-height: 25px;
   letter-spacing: -0.05em;
-  margin: 10px 0 10px;
+  margin: 20px 0 10px;
 
   // 말줄임을 위한 css
   display: -webkit-box;
@@ -71,12 +71,17 @@ const StyledPostInfo = styled.div`
 `;
 
 const StyledPostUserInfo = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   height: 50px;
   margin-top: 10px;
-  > img {
-    width: 40px;
-    margin-bottom: 10px;
-  }
+`;
+
+const StyledPostUserPofileImg = styled.img`
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+  width: 50px;
+  height: 50px;
 `;

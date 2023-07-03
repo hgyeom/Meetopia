@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import { db } from '../../firebase';
 import PostItem from './PostItem';
-import shortid from 'shortid';
 
 function List() {
   const dispatch = useDispatch();
@@ -37,7 +36,7 @@ function List() {
     <div>
       <StyledMainposts>
         {posts.map((post) => {
-          return <PostItem post={post} key={shortid.generate()} />;
+          return <PostItem post={post} key={post.id} />;
         })}
       </StyledMainposts>
     </div>
