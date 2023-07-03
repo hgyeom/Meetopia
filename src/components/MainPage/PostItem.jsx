@@ -60,7 +60,7 @@ const StyledPostContent = styled.div`
   // 말줄임을 위한 css
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 6;
   overflow: hidden;
 `;
 
