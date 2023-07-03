@@ -1,7 +1,12 @@
 import React from 'react';
+import Index from '../components/MainPage/Index';
 
 function Home() {
-  return <div>Home22</div>;
+  return (
+    <>
+      <Index />
+    </>
+  );
 }
 
 export default Home;
