@@ -1,3 +1,5 @@
+<a src = "https://files.slack.com/files-tmb/T043597JK8V-F05EZ666DUN-c85b7fb63e/meetopia_129.34x27_720.png"
+
 # Meetopia - 일조량 부족 (2023.06.26~07.03)
 1조 일조량 부족 - 파이어베이스와 리덕스를 사용한 리액트 프로젝트
   
