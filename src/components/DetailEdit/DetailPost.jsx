@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import shortid from 'shortid';
 import { useSelector } from 'react-redux';
 import * as S from './DetailPost.styled';
-import { Button, ButtonGray, ButtonXs, ButtonXsGray, Input, Select, SubTitle, Textarea, Title } from '../Common.styled';
+import { Button, ButtonGray, Input, Select, SubTitle, Textarea } from '../Common.styled';
 
 function DetailPost() {
   const { nickname, userid, profileImg } = useSelector((state) => {

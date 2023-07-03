@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
-import Login from '../components/LoginPage/Login';
-import Signup from '../components/LoginPage/Signup';
+import Login from '../components/LoginPage/Login.jsx';
+import Signup from '../components/LoginPage/Signup.jsx';
 import Mypage from '../pages/Mypage';
 import Edit from '../pages/MypageEdit';
-import Comments from '../components/CommentsPage';
 import Detail from '../pages/Detail';
 import DetailEdit from '../pages/DetailEdit';
 import DetailUpdate from '../components/DetailEdit/DetailUpdate';

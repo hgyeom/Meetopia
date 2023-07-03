@@ -80,7 +80,6 @@ export const ButtonLgGray = styled(ButtonLg)`
 `;
 
 export const Title = styled.h2`
-  /* font-family: 'Black Han Sans', sans-serif; */
   margin: 0 0 36px;
   font-size: 40px;
   font-weight: 600;

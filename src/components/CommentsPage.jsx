@@ -90,7 +90,7 @@ function Comments({ postId, nickname, userid }) {
           </S.AddBtn>
         </S.StF>
       </div>
-      <div style={{}}>
+      <div>
         {comments.map((comment) => {
           return (
             <S.CommentBox key={comment?.commentsId}>
