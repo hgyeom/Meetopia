@@ -5,17 +5,17 @@ const bannerData = [
   {
     id: '1',
     alt: '1번',
-    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124239325681430619/Meetopia-001.png'
+    img: 'https://firebasestorage.googleapis.com/v0/b/meetopia-detail.appspot.com/o/Meetopia-001.png?alt=media&token=d399ae16-c8b2-437a-8107-1aa1f064700b'
   },
   {
     id: '2',
     alt: '2번',
-    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124237008848564285/meetopia_banner_2.png'
+    img: 'https://firebasestorage.googleapis.com/v0/b/meetopia-detail.appspot.com/o/meetopia-002.png?alt=media&token=5a1c9285-9a78-4841-b3c8-db0dd30ba862'
   },
   {
     id: '3',
     alt: '3번',
-    img: 'https://cdn.discordapp.com/attachments/824139315830980612/1124237008051646515/meetopia_banner_3.png'
+    img: 'https://firebasestorage.googleapis.com/v0/b/meetopia-detail.appspot.com/o/meetopia-003.png?alt=media&token=ba123605-e5f8-468a-91fc-935ddedfb033'
   }
 ];
 
