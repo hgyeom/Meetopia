@@ -52,7 +52,7 @@ function DetailUpdate() {
   // 주제별 select 박스
   const selectTopicList = [
     { value: '없음', name: '==선택==' },
-    { value: '스터디', name: '공부' },
+    { value: '공부', name: '공부' },
     { value: '스포츠', name: '스포츠' },
     { value: '음악', name: '음악' },
     { value: '영화', name: '영화' },
@@ -66,7 +66,8 @@ function DetailUpdate() {
     { value: '서울', name: '서울' },
     { value: '경기', name: '경기' },
     { value: '인천', name: '인천' },
-    { value: '대전', name: '대구' },
+    { value: '대전', name: '대전' },
+    { value: '대구', name: '대구' },
     { value: '부산', name: '부산' },
     { value: '울산', name: '울산' },
     { value: '광주', name: '광주' },
