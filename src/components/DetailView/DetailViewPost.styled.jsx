@@ -34,11 +34,6 @@ export const LabelContent = styled.label`
   font-size: 18px;
 `;
 
-// export const PostLayout = styled.div`
-//   margin-left: 385px;
-//   margin-right: 385px;
-// `;
-
 export const Label = styled.span`
   font-weight: 600;
 `;

@@ -24,7 +24,6 @@ const FooterContainer = styled.footer`
   margin-top: 100px;
   padding: 54px 0 50px;
   background: #f6f6f6;
-  /* background: #ebebeb; */
   line-height: 1.3;
 
   p {
@@ -39,7 +38,5 @@ const FooterContainer = styled.footer`
     color: #949494;
   }
 `;
-
-const FooterBox = styled.div``;
 
 export default Footer;

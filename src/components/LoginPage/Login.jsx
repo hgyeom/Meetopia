@@ -5,12 +5,10 @@ import { auth } from '../../firebase';
 import LoginDiv from './Loginpage.styled';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { Input } from '../Common.styled';
-// import { signOut } from '@firebase/auth';
 
 function Login() {
   const [Email, setEmail] = useState('');
   const [PW, setPW] = useState('');
-  // const [ErrorMsg, setErrorMsg] = useState('');
 
   const user = useSelector((state) => state.user);
   let navigate = useNavigate();
@@ -75,7 +73,6 @@ function Login() {
         >
           회원가입
         </button>
-        {/* <button onClick={logOut}>로그아웃</button> */}
       </form>
     </LoginDiv>
   );

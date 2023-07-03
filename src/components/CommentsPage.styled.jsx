@@ -22,9 +22,6 @@ export const CommentBox = styled.div`
 `;
 
 export const DeletedBtn = styled(ButtonXsGray)`
-  /* background-color: white;
-  border: none; */
-  /* 지영님 이건 어떤가요 */
   margin-left: auto;
   display: flex;
   justify-content: flex-end;
