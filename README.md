@@ -91,7 +91,8 @@
 <img src = "https://velog.velcdn.com/images/summer_dev/post/01f89cd8-e8af-49cd-b0d8-700912c25663/image.png">
   
   
-
 ## 🎨 Vercel
-   <a href="https://meetopia.vercel.app/">![image](https://github.com/hgyeom/Meetopia/assets/96222942/44e80df6-6d7a-4264-b501-a085d19c60fb)
+<a href="https://meetopia.vercel.app/">
+    <img src="https://github.com/hgyeom/Meetopia/assets/96222942/f27f5c89-327c-4706-beee-4de99541db72"">
 </a>
+
