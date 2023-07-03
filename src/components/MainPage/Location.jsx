@@ -58,6 +58,7 @@ const StyledSelectItemList = styled.ul`
   width: 100px;
   border: 1px solid #ccc;
   background-color: #ffffff;
+  z-index: 99;
 `;
 const StyledSelectItem = styled.li`
   margin-top: 3px;
