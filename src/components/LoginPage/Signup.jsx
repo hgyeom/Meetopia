@@ -52,6 +52,13 @@ function Signup() {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
+      if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
+        alert('이메일 형식을 확인해주세요.');
+        return;
+      } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+        alert('이미 사용중인 이메일입니다.');
+        return;
+      }
       console.log('error with signUp', errorCode, errorMessage);
     }
   };
