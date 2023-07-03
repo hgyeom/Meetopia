@@ -47,7 +47,10 @@ function Comments({ postId, nickname, userid }) {
       alert('로그인 후 사용해주세요');
       return;
     }
-
+    if (!comment.length) {
+      alert('댓글을 입력해주세요.');
+      return;
+    }
     const newComment = { comment, nickname, postId, userid, days: new Date().toLocaleString() };
 
     const collectionRef = collection(db, 'comment');
